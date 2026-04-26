@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Compress Image Online Free — Reduce image size in KB without losing quality. Supports JPG, PNG, WebP up to 200MB. Fast, secure, 100% browser-based. No uploads." />
+  <meta name="keywords" content="compress image, reduce image size, shrink image, image compressor online, jpg compressor, png compressor, webp compressor, reduce image size in kb, free image tools" />
+  <meta name="author" content="Free Image &amp; PDF Tools" />
+  <title>Compress Image Online Free — Reduce Image Size in KB | FreeTools</title>
+
+  <meta property="og:title" content="Free Image Compressor — Shrink Photos Instantly" />
+  <meta property="og:description" content="Reduce image file sizes locally in your browser. Supports JPG, PNG, WebP up to 200MB. No uploads, no servers." />
+  <meta property="og:type" content="website" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <!-- Lucide Icons (sync — NO defer) -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="tool-page.css" />
+  <link rel="stylesheet" href="compress-image.css" />
+</head>
+<body>
+
+  <!-- ═══════════════════ NAVBAR ═══════════════════ -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <span class="logo-icon">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+            <rect x="2" y="2" width="24" height="24" rx="6" fill="url(#lg1)" />
+            <path d="M9 14l3 3 7-7" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <defs><linearGradient id="lg1" x1="2" y1="2" x2="26" y2="26"><stop stop-color="#6366f1"/><stop offset="1" stop-color="#a855f7"/></linearGradient></defs>
+          </svg>
+        </span>
+        <span class="logo-text">FreeTools</span>
+      </a>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="index.html#image-tools" class="nav-link active">Image Tools</a></li>
+        <li><a href="index.html#pdf-tools" class="nav-link">PDF Tools</a></li>
+        <li><a href="about.html" class="nav-link">About</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+      </ul>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation menu">
+        <span class="hamburger"></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ═══════════════════ TOOL HERO ═══════════════════ -->
+  <section class="tool-hero">
+    <div class="tool-container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="index.html">Home</a>
+        <i data-lucide="chevron-right" class="breadcrumb-sep"></i>
+        <a href="index.html#image-tools">Image Tools</a>
+        <i data-lucide="chevron-right" class="breadcrumb-sep"></i>
+        <span class="breadcrumb-current">Compress Image</span>
+      </nav>
+      <div class="tool-hero-content">
+        <div class="tool-hero-icon ci-hero-icon">
+          <i data-lucide="file-down"></i>
+        </div>
+        <h1 class="tool-hero-title">Compress Image Online Free</h1>
+        <p class="tool-hero-desc">
+          Reduce JPG, PNG, and WebP file sizes in seconds — with full control over quality. All processing runs 100% in your browser. No uploads, no servers, no privacy risk.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ TOOL WORKSPACE ═══════════════════ -->
+  <section class="tool-workspace">
+    <div class="tool-container">
+
+      <!-- Privacy Notice -->
+      <div class="ci-privacy-notice" id="privacy-notice">
+        <i data-lucide="shield-check"></i>
+        <span>Your images are processed securely in your browser and are <strong>not uploaded or stored</strong> on any server.</span>
+      </div>
+
+      <!-- UPLOAD ZONE -->
+      <div class="upload-zone" id="upload-zone">
+        <!-- Preview (visible after file selected) -->
+        <div class="upload-preview" id="upload-preview">
+          <img id="upload-preview-img" src="" alt="Preview" />
+          <div class="upload-preview-info">
+            <span class="upload-preview-name" id="upload-preview-name"></span>
+            <span class="upload-preview-size" id="upload-preview-size"></span>
+          </div>
+          <button class="upload-remove-btn" id="upload-remove-btn" title="Remove image">
+            <i data-lucide="x"></i>
+          </button>
+        </div>
+        <!-- Default empty state -->
+        <div class="upload-zone-inner">
+          <div class="upload-icon-wrap">
+            <i data-lucide="image-plus" class="upload-icon"></i>
+          </div>
+          <h3 class="upload-title">Drop your image here</h3>
+          <p class="upload-hint">or click to browse — JPG, PNG, WebP up to 200 MB</p>
+          <label class="btn btn-primary upload-btn" for="file-input">
+            <i data-lucide="folder-open" class="btn-icon"></i>
+            Choose Image
+          </label>
+          <input type="file" id="file-input" accept="image/jpeg,image/png,image/webp" hidden />
+        </div>
+      </div>
+
+      <!-- Large-file warning (hidden by default) -->
+      <div class="ci-warning" id="large-file-warning" style="display:none;">
+        <i data-lucide="alert-triangle"></i>
+        <span>Large file detected (<span id="warning-size"></span>). Compression may take a moment. Your browser will not freeze — please wait.</span>
+      </div>
+
+      <!-- ═══════════════════ TOOL PANEL ═══════════════════ -->
+      <div class="tool-panel" id="tool-panel">
+
+        <!-- Info Bar -->
+        <div class="info-bar" id="info-bar">
+          <div class="info-chip">
+            <i data-lucide="image"></i>
+            <span id="info-name">image.jpg</span>
+          </div>
+          <div class="info-chip">
+            <i data-lucide="ruler"></i>
+            <strong id="info-dims">— × —</strong>
+          </div>
+          <div class="info-chip">
+            <i data-lucide="hard-drive"></i>
+            <span id="info-size">—</span>
+          </div>
+        </div>
+
+        <!-- Controls -->
+        <div class="controls-bar">
+          <h3 class="controls-title">
+            <i data-lucide="sliders-horizontal"></i>
+            Compression Settings
+          </h3>
+
+          <!-- Presets -->
+          <div class="ci-presets" id="presets-row">
+            <button class="ci-preset-btn" data-quality="30" id="preset-low">
+              <i data-lucide="gauge"></i>
+              <span>Low</span>
+              <small>Max compression</small>
+            </button>
+            <button class="ci-preset-btn active" data-quality="70" id="preset-medium">
+              <i data-lucide="sliders-horizontal"></i>
+              <span>Medium</span>
+              <small>Balanced</small>
+            </button>
+            <button class="ci-preset-btn" data-quality="90" id="preset-high">
+              <i data-lucide="sparkles"></i>
+              <span>High</span>
+              <small>Best quality</small>
+            </button>
+          </div>
+
+          <div class="controls-grid ci-controls-grid">
+            <!-- Quality Slider -->
+            <div class="control-group">
+              <label for="quality-slider">
+                Quality
+                <span class="ci-badge-hint">Higher = better quality, larger file</span>
+              </label>
+              <div class="range-wrap">
+                <input type="range" id="quality-slider" min="1" max="100" value="70" />
+                <span class="range-value" id="quality-val">70%</span>
+              </div>
+              <div class="ci-quality-scale">
+                <span>Smallest file</span><span>Balanced</span><span>Best quality</span>
+              </div>
+            </div>
+
+            <!-- Output Format -->
+            <div class="control-group">
+              <label for="out-format">Output Format</label>
+              <select id="out-format">
+                <option value="original">Same as original</option>
+                <option value="jpeg">JPEG (.jpg)</option>
+                <option value="png">PNG (.png)</option>
+                <option value="webp">WebP (.webp) — smallest</option>
+              </select>
+              <div id="format-auto-msg" style="display:none; font-size: 0.75rem; color: var(--emerald); margin-top: 6px;">
+                <i data-lucide="check-circle" style="width:12px; height:12px; margin-right:4px; vertical-align:middle;"></i>
+                <span style="vertical-align:middle;">Format auto-selected for best compression</span>
+              </div>
+
+              <!-- Target Size (optional) -->
+              <label for="target-size" style="margin-top:20px;">
+                Target Size <span class="ci-badge-hint">(optional — leave blank for slider quality)</span>
+              </label>
+              <div class="ci-target-wrap">
+                <input type="number" id="target-size" placeholder="e.g. 100" min="1" />
+                <span class="ci-target-unit">KB</span>
+              </div>
+            </div>
+          </div>
+
+          <button class="btn btn-primary ci-action-btn" id="compress-btn">
+            <i data-lucide="zap" class="btn-icon"></i> Compress Image
+          </button>
+        </div>
+
+        <!-- BEFORE / AFTER PREVIEW -->
+        <div class="preview-section" id="preview-section" style="display: none;">
+          <h3 class="preview-title">
+            <i data-lucide="eye"></i> Before / After
+          </h3>
+          <div class="ba-container" id="ba-container">
+            <div class="ba-wrapper">
+              <div class="ba-image ba-before">
+                <img id="before-img" src="" alt="Original" />
+                <span class="ba-label">Original</span>
+              </div>
+              <div class="ba-image ba-after" id="ba-after">
+                <img id="after-img" src="" alt="Compressed" />
+                <span class="ba-label ba-label--after">Compressed</span>
+              </div>
+              <div class="ba-slider" id="ba-slider">
+                <div class="ba-handle">
+                  <i data-lucide="arrow-left-right"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Stats Row -->
+          <div class="result-stats">
+            <div class="result-stat">
+              <span class="result-stat-label">Original</span>
+              <span class="result-stat-value" id="stat-orig-size">—</span>
+            </div>
+            <div class="result-stat result-stat--arrow"><i data-lucide="arrow-right"></i></div>
+            <div class="result-stat result-stat--highlight">
+              <span class="result-stat-label">Compressed</span>
+              <span class="result-stat-value result-stat-value--green" id="stat-new-size">—</span>
+            </div>
+            <div class="result-stat result-stat--arrow"><i data-lucide="arrow-right"></i></div>
+            <div class="result-stat">
+              <span class="result-stat-label">Space Saved</span>
+              <span class="result-stat-value result-stat-value--green" id="stat-saved">—</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- DOWNLOAD SECTION -->
+        <div class="download-section" id="download-section" style="display: none;">
+          <button class="btn-download" id="download-btn">
+            <i data-lucide="download"></i> Download Compressed Image
+          </button>
+          <button class="btn btn-outline" id="reset-btn">
+            <i data-lucide="refresh-ccw" class="btn-icon"></i> Compress Another
+          </button>
+        </div>
+
+      </div><!-- end tool-panel -->
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════ SEO / INFO SECTION ═══════════════════ -->
+  <section class="seo-section">
+    <div class="tool-container">
+      <div class="ci-seo-grid">
+        <div class="seo-content">
+          <h2>Free Online Image Compressor — Reduce Size Without Losing Quality</h2>
+          <p>
+            Need to shrink your photos for a website, email attachment, or social media post? Our <strong>free image compressor</strong> makes it effortless. Upload any <strong>JPG, PNG, or WebP</strong> image — up to a generous <strong>200 MB</strong> — and watch the file size drop in seconds. Unlike other tools, we never upload your images to a remote server. All compression runs entirely inside your web browser using the native Canvas API, which means your files stay completely private and secure.
+          </p>
+          <p>
+            Use the <strong>quality slider</strong> for fine-grained control, or pick a preset — Low for maximum compression, Medium for the best balance, or High for near-lossless results. You can even specify an exact <strong>target file size in KB</strong> and the tool will automatically find the right quality level to hit your goal. The live Before/After slider lets you compare the original and compressed images side-by-side, so you'll always know exactly what you're getting before you download.
+          </p>
+          <p>
+            Whether you're a photographer optimizing portfolio images, a developer improving page load speed, or just someone who needs to fit a photo under an upload limit, this tool has you covered. It works on every modern browser — Chrome, Firefox, Safari, and Edge — on desktop and mobile alike.
+          </p>
+          <h3>Tips for Best Results</h3>
+          <ul>
+            <li><strong>JPEG at 70–80%</strong> quality delivers the best size-to-quality ratio for photos.</li>
+            <li><strong>WebP</strong> format produces the smallest files — 25-35% smaller than JPEG at equal quality.</li>
+            <li><strong>PNG</strong> is lossless — quality slider has minimal effect. Convert to JPEG or WebP for dramatic savings.</li>
+            <li>Use the <strong>Target Size</strong> option when you need to meet a specific upload limit (e.g. 100 KB for a forum avatar).</li>
+          </ul>
+        </div>
+        <div class="ci-faqs">
+          <h3>Frequently Asked Questions</h3>
+          <div class="faq-accordion">
+
+            <div class="faq-item" id="faq-1">
+              <button class="faq-question" aria-expanded="false">
+                <span>Is there a file size limit?</span>
+                <i data-lucide="chevron-down" class="faq-icon"></i>
+              </button>
+              <div class="faq-answer"><p>You can upload images up to 200 MB. For very large files (over 50 MB), you'll see a warning that compression may take longer, but the tool will still work.</p></div>
+            </div>
+
+            <div class="faq-item" id="faq-2">
+              <button class="faq-question" aria-expanded="false">
+                <span>Are my images uploaded to a server?</span>
+                <i data-lucide="chevron-down" class="faq-icon"></i>
+              </button>
+              <div class="faq-answer"><p>No. Everything runs 100% inside your browser using JavaScript and the HTML5 Canvas API. Your images never leave your device — we can't see or access them.</p></div>
+            </div>
+
+            <div class="faq-item" id="faq-3">
+              <button class="faq-question" aria-expanded="false">
+                <span>What quality setting should I use?</span>
+                <i data-lucide="chevron-down" class="faq-icon"></i>
+              </button>
+              <div class="faq-answer"><p>For most photos, 70–80% (the Medium preset) reduces size by 50–70% with no visible quality loss. For web thumbnails, 50–60% is fine. For archival, use 90%+.</p></div>
+            </div>
+
+            <div class="faq-item" id="faq-4">
+              <button class="faq-question" aria-expanded="false">
+                <span>Why does PNG compress less than JPG?</span>
+                <i data-lucide="chevron-down" class="faq-icon"></i>
+              </button>
+              <div class="faq-answer"><p>PNG uses lossless compression — reducing quality has minimal effect. To dramatically shrink a PNG, change the output format to JPEG or WebP, which support lossy compression.</p></div>
+            </div>
+
+            <div class="faq-item" id="faq-5">
+              <button class="faq-question" aria-expanded="false">
+                <span>Can I compress to a specific file size like 50 KB?</span>
+                <i data-lucide="chevron-down" class="faq-icon"></i>
+              </button>
+              <div class="faq-answer"><p>Yes! Enter your desired size in the "Target Size" field (in KB). The tool uses a binary-search algorithm to automatically find the optimal quality setting that produces a file closest to your target.</p></div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ RELATED TOOLS ═══════════════════ -->
+  <section class="related-section">
+    <div class="tool-container">
+      <h2 class="related-heading">You Might Also Like</h2>
+      <div class="related-grid">
+        <a href="resize-image.html" class="related-card" id="related-resize">
+          <div class="related-icon related-icon--blue"><i data-lucide="maximize-2"></i></div>
+          <div><h4>Resize Image</h4><p>Change image dimensions to any size.</p></div>
+          <i data-lucide="arrow-right" class="related-arrow"></i>
+        </a>
+        <a href="image-enhancer.html" class="related-card" id="related-enhance">
+          <div class="related-icon related-icon--purple"><i data-lucide="sparkles"></i></div>
+          <div><h4>Image Enhancer</h4><p>Improve brightness, contrast and sharpness.</p></div>
+          <i data-lucide="arrow-right" class="related-arrow"></i>
+        </a>
+        <a href="bg-remover.html" class="related-card" id="related-bgremove">
+          <div class="related-icon related-icon--rose"><i data-lucide="scissors"></i></div>
+          <div><h4>Background Remover</h4><p>Remove image background with AI.</p></div>
+          <i data-lucide="arrow-right" class="related-arrow"></i>
+        </a>
+        <a href="compress-pdf.html" class="related-card" id="related-compresspdf">
+          <div class="related-icon related-icon--amber"><i data-lucide="archive"></i></div>
+          <div><h4>Compress PDF</h4><p>Shrink PDF files for easy sharing.</p></div>
+          <i data-lucide="arrow-right" class="related-arrow"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ FOOTER ═══════════════════ -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="index.html" class="nav-logo">
+            <span class="logo-icon">
+              <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+                <rect x="2" y="2" width="24" height="24" rx="6" fill="url(#lg2)" />
+                <path d="M9 14l3 3 7-7" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <defs><linearGradient id="lg2" x1="2" y1="2" x2="26" y2="26"><stop stop-color="#6366f1"/><stop offset="1" stop-color="#a855f7"/></linearGradient></defs>
+              </svg>
+            </span>
+            <span class="logo-text">FreeTools</span>
+          </a>
+          <p class="footer-tagline">Powerful image &amp; PDF tools, free forever.</p>
+        </div>
+        <div class="footer-links-group">
+          <div class="footer-col"><h4>Image Tools</h4>
+            <ul>
+              <li><a href="resize-image.html">Resize Image</a></li>
+              <li><a href="compress-image.html">Image Compressor</a></li>
+              <li><a href="image-enhancer.html">Image Enhancer</a></li>
+              <li><a href="bg-remover.html">Background Remover</a></li>
+            </ul>
+          </div>
+          <div class="footer-col"><h4>PDF Tools</h4>
+            <ul>
+              <li><a href="compress-pdf.html">Compress PDF</a></li>
+              <li><a href="merge-pdf.html">Merge PDF</a></li>
+              <li><a href="pdf-security.html">PDF Security</a></li>
+              <li><a href="pdf-security.html">PDF Security</a></li>
+            </ul>
+          </div>
+          <div class="footer-col"><h4>Company</h4>
+            <ul>
+              <li><a href="about.html">About Us</a></li>
+              <li><a href="contact.html">Contact Us</a></li>
+              <li><a href="privacy-policy.html">Privacy Policy</a></li>
+              <li><a href="terms-conditions.html">Terms &amp; Conditions</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Free Image &amp; PDF Tools. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <button class="scroll-top" id="scroll-top" aria-label="Scroll to top">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"/></svg>
+  </button>
+
+  <script src="compress-image.js"></script>
+</body>
+</html>

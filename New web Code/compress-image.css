@@ -1,0 +1,254 @@
+/* ═══════════════════ COMPRESS IMAGE PAGE ═══════════════════ */
+
+/* ── Hero icon ── */
+.ci-hero-icon {
+  background: rgba(245, 158, 11, .12);
+  color: #f59e0b;
+}
+
+/* ── Privacy notice banner ── */
+.ci-privacy-notice {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 20px;
+  background: rgba(16, 185, 129, .06);
+  border: 1px solid rgba(16, 185, 129, .2);
+  border-radius: var(--radius-sm);
+  margin-bottom: 24px;
+  font-size: .88rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+.ci-privacy-notice i,
+.ci-privacy-notice svg {
+  width: 20px;
+  height: 20px;
+  color: var(--emerald);
+  flex-shrink: 0;
+}
+.ci-privacy-notice strong {
+  color: var(--emerald);
+}
+
+/* ── Large-file warning banner ── */
+.ci-warning {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 20px;
+  background: rgba(245, 158, 11, .06);
+  border: 1px solid rgba(245, 158, 11, .25);
+  border-radius: var(--radius-sm);
+  margin-top: 16px;
+  margin-bottom: 4px;
+  font-size: .88rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  animation: fadeInUp .4s ease both;
+}
+.ci-warning i,
+.ci-warning svg {
+  width: 20px;
+  height: 20px;
+  color: #f59e0b;
+  flex-shrink: 0;
+}
+
+/* ── Info Bar (file meta chips) ── */
+.info-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+.info-chip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  font-size: .85rem;
+  color: var(--text-muted);
+}
+.info-chip i,
+.info-chip svg {
+  width: 16px;
+  height: 16px;
+  color: var(--indigo);
+}
+.info-chip strong {
+  color: var(--text);
+  font-weight: 700;
+}
+
+/* ── Presets Row ── */
+.ci-presets {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 28px;
+}
+.ci-preset-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 18px 12px;
+  border-radius: var(--radius-sm);
+  border: 2px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+  cursor: pointer;
+  transition: var(--transition);
+}
+.ci-preset-btn:hover {
+  border-color: rgba(99, 102, 241, .35);
+  background: rgba(99, 102, 241, .04);
+}
+.ci-preset-btn.active {
+  border-color: var(--indigo);
+  background: rgba(99, 102, 241, .08);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, .12);
+}
+.ci-preset-btn i,
+.ci-preset-btn svg {
+  width: 22px;
+  height: 22px;
+  color: var(--indigo);
+}
+.ci-preset-btn span {
+  font-weight: 700;
+  font-size: .9rem;
+}
+.ci-preset-btn small {
+  font-size: .72rem;
+  color: var(--text-dim);
+  font-weight: 500;
+}
+
+/* ── Controls grid ── */
+.ci-controls-grid {
+  grid-template-columns: 1fr 1fr !important;
+  gap: 28px !important;
+}
+
+/* ── Quality scale labels ── */
+.ci-quality-scale {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 6px;
+  font-size: .72rem;
+  color: var(--text-dim);
+  font-weight: 500;
+}
+
+/* ── Badge hint ── */
+.ci-badge-hint {
+  font-size: .72rem;
+  font-weight: 400;
+  color: var(--text-dim);
+  margin-left: 6px;
+}
+
+/* ── Target size input ── */
+.ci-target-wrap {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xs);
+  background: var(--bg);
+  overflow: hidden;
+  transition: var(--transition);
+}
+.ci-target-wrap:focus-within {
+  border-color: var(--indigo);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, .1);
+}
+.ci-target-wrap input {
+  flex: 1;
+  padding: 10px 14px;
+  border: none;
+  background: transparent;
+  color: var(--text);
+  font-size: .95rem;
+  font-weight: 600;
+  outline: none;
+  -moz-appearance: textfield;
+}
+.ci-target-wrap input::-webkit-inner-spin-button,
+.ci-target-wrap input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+.ci-target-unit {
+  padding: 10px 16px;
+  font-weight: 700;
+  color: var(--text-muted);
+  background: rgba(255, 255, 255, .02);
+  border-left: 1px solid var(--border);
+  font-size: .85rem;
+}
+
+/* ── Action button ── */
+.ci-action-btn {
+  width: 100%;
+  padding: 16px;
+  justify-content: center;
+  font-size: 1rem;
+  margin-top: 12px;
+}
+
+/* ── SEO grid ── */
+.ci-seo-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: start;
+}
+.ci-faqs h3 {
+  font-size: 1.1rem;
+  font-weight: 800;
+  margin-bottom: 20px;
+}
+.faq-accordion {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.seo-content ul,
+.seo-content ol {
+  color: var(--text-muted);
+  font-size: .95rem;
+  line-height: 1.8;
+  padding-left: 20px;
+  margin-bottom: 16px;
+}
+.seo-content h3 {
+  font-size: 1.1rem;
+  font-weight: 800;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+/* ── Spinner / loading state ── */
+.ci-spin { animation: ci_spin 1s linear infinite; }
+@keyframes ci_spin { to { transform: rotate(360deg); } }
+
+/* ═══════════════════ MOBILE ═══════════════════ */
+@media (max-width: 768px) {
+  .ci-seo-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .ci-controls-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .ci-presets {
+    grid-template-columns: 1fr;
+  }
+  .info-bar {
+    flex-direction: column;
+  }
+}

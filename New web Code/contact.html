@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Contact FreeTools. Have feedback, bug reports, or feature requests? We'd love to hear from you." />
+  <title>Contact Us | Get in Touch | FreeTools</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+  
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="tool-page.css" />
+  <style>
+    .contact-page-content {
+      padding: 120px 0 80px;
+    }
+    .contact-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+    .contact-header h1 {
+      font-size: 3rem;
+      font-weight: 900;
+      margin-bottom: 16px;
+    }
+    .contact-header p {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+    }
+    .contact-wrapper {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 64px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+    }
+    .contact-info h2 {
+      font-size: 2rem;
+      margin-bottom: 24px;
+    }
+    .contact-info p {
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 32px;
+    }
+    .info-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .info-item i {
+      width: 24px;
+      height: 24px;
+      color: var(--emerald);
+    }
+    .info-item div h4 {
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .info-item div p {
+      margin: 0;
+      color: var(--text-dim);
+    }
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+    .form-group input, .form-group textarea {
+      width: 100%;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 12px 16px;
+      color: #fff;
+      font-family: inherit;
+      transition: var(--transition);
+    }
+    .form-group input:focus, .form-group textarea:focus {
+      border-color: var(--emerald);
+      outline: none;
+      box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.1);
+    }
+    @media (max-width: 868px) {
+      .contact-wrapper { grid-template-columns: 1fr; padding: 32px; }
+      .contact-header h1 { font-size: 2.5rem; }
+    }
+  </style>
+</head>
+<body>
+  <nav id="navbar" class="navbar scrolled">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <span class="logo-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="2" y="2" width="24" height="24" rx="6" fill="url(#logoGrad)" /><path d="M9 14l3 3 7-7" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><defs><linearGradient id="logoGrad" x1="2" y1="2" x2="26" y2="26"><stop stop-color="#6366f1"/><stop offset="1" stop-color="#a855f7"/></linearGradient></defs></svg></span>
+        <span class="logo-text">FreeTools</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="about.html" class="nav-link">About</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="contact-page-content">
+    <div class="container">
+      <header class="contact-header">
+        <h1>Get in Touch</h1>
+        <p>Have questions or suggestions? We'd love to hear from you.</p>
+      </header>
+
+      <div class="contact-wrapper">
+        <div class="contact-info">
+          <h2>Let's talk about the future of free tools.</h2>
+          <p>Whether you've found a bug, have a feature request, or just want to say hi, our team is ready to listen.</p>
+          
+          <div class="info-item">
+            <i data-lucide="mail"></i>
+            <div>
+              <h4>Email Address</h4>
+              <p>support@freetools.dev</p>
+            </div>
+          </div>
+          <div class="info-item">
+            <i data-lucide="message-circle"></i>
+            <div>
+              <h4>Social Media</h4>
+              <p>@freetools_dev</p>
+            </div>
+          </div>
+          <div class="info-item">
+            <i data-lucide="clock"></i>
+            <div>
+              <h4>Response Time</h4>
+              <p>Within 24-48 hours</p>
+            </div>
+          </div>
+        </div>
+
+        <form class="contact-form" id="contact-form-page">
+          <div class="form-group">
+            <label for="name">Your Name</label>
+            <input type="text" id="name" placeholder="John Doe" required />
+          </div>
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" placeholder="john@example.com" required />
+          </div>
+          <div class="form-group">
+            <label for="subject">Subject</label>
+            <input type="text" id="subject" placeholder="How can we help?" required />
+          </div>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" rows="5" placeholder="Your message..." required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary btn-full">
+            <i data-lucide="send" class="btn-icon"></i> Send Message
+          </button>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-bottom">
+        <p>&copy; 2026 Free Image & PDF Tools. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      if (window.lucide) lucide.createIcons();
+      
+      const form = document.getElementById('contact-form-page');
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const btn = form.querySelector('button[type="submit"]');
+        const originalText = btn.innerHTML;
+        
+        btn.disabled = true;
+        btn.innerHTML = 'Sending...';
+
+        const payload = {
+          name: document.getElementById('name').value,
+          email: document.getElementById('email').value,
+          message: document.getElementById('message').value
+        };
+
+        try {
+          const response = await fetch('/api/contact', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+
+          const data = await response.json();
+
+          if (data.success) {
+            alert('Thank you! Your message has been sent successfully.');
+            form.reset();
+          } else {
+            alert('Error: ' + data.message);
+          }
+        } catch (err) {
+          console.error(err);
+          alert('Sorry, there was a problem sending your message. Please try again later.');
+        } finally {
+          btn.disabled = false;
+          btn.innerHTML = originalText;
+          if (window.lucide) lucide.createIcons();
+        }
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+{
+  "messages": [
+    {
+      "id": "611a67ad-a54a-456a-a62b-ebca58810356",
+      "name": "John Test",
+      "email": "john@test.com",
+      "message": "Hello, I am testing if this message appears in the admin panel.",
+      "date": "2026-04-23T11:22:24.597Z",
+      "status": "read"
+    },
+    {
+      "id": "668d040c-6228-41d3-84db-8473c7bee9d1",
+      "name": "John Test",
+      "email": "john@test.com",
+      "message": "Hello, I am testing if this message appears in the admin panel.",
+      "date": "2026-04-23T11:23:01.596Z",
+      "status": "read"
+    }
+  ],
+  "admin": {
+    "email": "admin@freetools.dev",
+    "password": "$2b$10$XODS3TIpLy/iV6yw4x48OOi7EqU0hncfipuvS2kAHckc3tLX8ggL."
+  }
+}

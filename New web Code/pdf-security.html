@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Secure your PDFs by locking them with a password, or unlock protected PDF files locally in your browser. Fast, free, and completely private." />
+  <meta name="keywords" content="lock pdf, unlock pdf, pdf password, encrypt pdf, decrypt pdf, secure pdf online, remove pdf password" />
+  <meta name="author" content="Free Image &amp; PDF Tools" />
+  <title>Lock or Unlock PDF | Free PDF Security Suite | FreeTools</title>
+
+  <meta property="og:title" content="Free PDF Security Suite — Lock &amp; Unlock PDFs" />
+  <meta property="og:description" content="Encrypt your PDFs with a password or unlock them to remove restrictions. 100% free, secure, and lightning fast." />
+  <meta property="og:type" content="website" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <!-- Libraries loaded in correct order (NO defer/async — must be synchronous & blocking) -->
+  <!-- 1. pdf-lib: for rebuilding unencrypted PDFs (Unlock feature) -->
+  <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+
+  <!-- 2. jsPDF: for creating password-encrypted PDFs (Lock feature) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+  <!-- 3. PDF.js: for reading & decrypting password-protected PDFs -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+
+  <!-- 4. Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="tool-page.css" />
+  <link rel="stylesheet" href="pdf-security.css" />
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav id="navbar" class="navbar scrolled">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo" id="nav-logo">
+        <span class="logo-icon">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+            <rect x="2" y="2" width="24" height="24" rx="6" fill="url(#logoGrad)" />
+            <path d="M9 14l3 3 7-7" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <defs><linearGradient id="logoGrad" x1="2" y1="2" x2="26" y2="26"><stop stop-color="#6366f1"/><stop offset="1" stop-color="#a855f7"/></linearGradient></defs>
+          </svg>
+        </span>
+        <span class="logo-text">FreeTools</span>
+      </a>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle Navigation">
+        <span class="hamburger"></span>
+      </button>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html" class="nav-link" id="nav-home">Home</a></li>
+        <li><a href="index.html#image-tools" class="nav-link" id="nav-image-tools">Image Tools</a></li>
+        <li><a href="index.html#pdf-tools" class="nav-link" id="nav-pdf-tools">PDF Tools</a></li>
+        <li><a href="about.html" class="nav-link" id="nav-about">About</a></li>
+        <li><a href="contact.html" class="nav-link" id="nav-contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- TOOL HERO -->
+  <section class="tool-hero">
+    <div class="tool-container">
+      <div class="tool-hero-content">
+        <span class="tool-tag tool-tag--blue">
+          <i data-lucide="shield-check"></i> PDF Security Suite
+        </span>
+        <h1 class="tool-title">Lock or Unlock PDF</h1>
+        <p class="tool-desc">
+          Encrypt your PDF with a strong password to protect sensitive data, or unlock a protected PDF to remove restrictions. All processing runs securely in your browser.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TOOL WORKSPACE -->
+  <section class="tool-workspace">
+    <div class="tool-container">
+
+      <!-- MODE TOGGLE -->
+      <div class="mode-toggle" id="mode-toggle">
+        <button class="mode-btn active lock-mode-active" id="btn-mode-lock" data-mode="lock">
+          <i data-lucide="lock"></i> Lock PDF
+        </button>
+        <button class="mode-btn" id="btn-mode-unlock" data-mode="unlock">
+          <i data-lucide="unlock"></i> Unlock PDF
+        </button>
+      </div>
+
+      <!-- UPLOAD SECTION -->
+      <div class="upload-section active" id="upload-section">
+        <div class="upload-box" id="upload-box">
+          <input type="file" id="file-input" accept="application/pdf" hidden />
+          <div class="upload-icon">
+            <i data-lucide="file-text"></i>
+          </div>
+          <h3>Choose a PDF to <span id="upload-action-text">Lock</span></h3>
+          <p>or drag and drop it here</p>
+          <button class="btn btn-primary" id="select-pdf-btn">
+            <i data-lucide="folder-open" class="btn-icon"></i> Select PDF
+          </button>
+          <div class="upload-footer">
+            <i data-lucide="shield-check"></i> Processed locally. No files are stored.
+          </div>
+        </div>
+      </div>
+
+      <!-- LOCK PDF PANEL -->
+      <div class="security-panel" id="lock-panel">
+        <div class="panel-header">
+          <h2 class="panel-title"><i data-lucide="lock"></i> Encrypt PDF</h2>
+          <p class="panel-desc">Protect your document from unauthorized access with a password.</p>
+        </div>
+
+        <div class="form-group">
+          <label for="lock-password">Set Password</label>
+          <div class="password-input-wrapper">
+            <input type="password" id="lock-password" placeholder="Enter a strong password" autocomplete="new-password" />
+            <button class="toggle-password" data-target="lock-password" aria-label="Toggle password visibility"><i data-lucide="eye"></i></button>
+          </div>
+
+          <div class="strength-meter-container">
+            <div class="strength-bars" id="strength-bars">
+              <div class="strength-bar"></div>
+              <div class="strength-bar"></div>
+              <div class="strength-bar"></div>
+              <div class="strength-bar"></div>
+            </div>
+            <div class="strength-text" id="strength-text">Enter password</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="lock-confirm">Confirm Password</label>
+          <div class="password-input-wrapper">
+            <input type="password" id="lock-confirm" placeholder="Re-enter password" autocomplete="new-password" />
+            <button class="toggle-password" data-target="lock-confirm" aria-label="Toggle password visibility"><i data-lucide="eye"></i></button>
+          </div>
+          <div class="error-message" id="lock-error"></div>
+        </div>
+
+        <button class="btn btn-primary action-btn" id="btn-process-lock">
+          <i data-lucide="lock" class="btn-icon"></i> Protect PDF
+        </button>
+      </div>
+
+      <!-- UNLOCK PDF PANEL -->
+      <div class="security-panel" id="unlock-panel">
+        <div class="panel-header">
+          <h2 class="panel-title"><i data-lucide="unlock"></i> Unlock PDF</h2>
+          <p class="panel-desc">Remove password protection from your document.</p>
+        </div>
+
+        <div class="warning-box">
+          <i data-lucide="info"></i>
+          <div>
+            <strong>Important:</strong> This tool only works with the correct password provided by the user. It does not crack or bypass unknown passwords.
+          </div>
+        </div>
+
+        <div class="form-group" style="margin-top: 24px;">
+          <label for="unlock-password">Enter Current Password</label>
+          <div class="password-input-wrapper">
+            <input type="password" id="unlock-password" placeholder="Password to open the PDF" autocomplete="current-password" />
+            <button class="toggle-password" data-target="unlock-password" aria-label="Toggle password visibility"><i data-lucide="eye"></i></button>
+          </div>
+          <div class="error-message" id="unlock-error"></div>
+        </div>
+
+        <button class="btn btn-primary action-btn" id="btn-process-unlock">
+          <i data-lucide="unlock" class="btn-icon"></i> Unlock PDF
+        </button>
+      </div>
+
+      <!-- DOWNLOAD SECTION -->
+      <div id="download-section" style="display:none;">
+        <div class="success-icon">
+          <i data-lucide="check"></i>
+        </div>
+        <h2 style="margin-bottom: 8px;">Success!</h2>
+        <p style="color: var(--text-secondary); margin-bottom: 24px;" id="success-msg">Your PDF has been processed.</p>
+
+        <div style="display: flex; gap: 16px; justify-content: center;">
+          <button class="btn btn-primary" id="download-btn">
+            <i data-lucide="download" class="btn-icon"></i> Download PDF
+          </button>
+          <button class="btn btn-outline" id="start-over-btn">
+            Start Over
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SEO / INFO SECTION -->
+  <section class="seo-section">
+    <div class="tool-container">
+      <div class="seo-grid">
+        <div class="seo-content">
+          <h2>Secure Your PDFs Locally</h2>
+          <p>
+            Whether you need to share sensitive financial records, legal contracts, or personal documents, our <strong>PDF Security Suite</strong> ensures your files remain completely private. Lock your PDFs with a strong password to prevent unauthorized access.
+          </p>
+          <p>
+            Received a password-protected PDF that you're tired of entering the password for? Use our <strong>Unlock PDF</strong> feature to permanently remove the password restrictions. Please note that you must know the current password to unlock the document; we do not provide password cracking services.
+          </p>
+          <h3>How to Lock a PDF</h3>
+          <ol>
+            <li>Select the "Lock PDF" tab at the top.</li>
+            <li>Upload your PDF file.</li>
+            <li>Enter and confirm a strong password.</li>
+            <li>Click "Protect PDF" and download your newly encrypted file.</li>
+          </ol>
+          <h3>How to Unlock a PDF</h3>
+          <ol>
+            <li>Select the "Unlock PDF" tab at the top.</li>
+            <li>Upload your password-protected PDF.</li>
+            <li>Enter the correct password.</li>
+            <li>Click "Unlock PDF" and download the restriction-free file.</li>
+          </ol>
+        </div>
+        <div class="seo-faqs">
+          <h3>Frequently Asked Questions</h3>
+          <div class="faq-accordion">
+            <div class="faq-item" id="faq-1">
+              <button class="faq-question" aria-expanded="false">
+                <span>Is it safe to type my password here?</span>
+                <i data-lucide="chevron-down" class="faq-icon"></i>
+              </button>
+              <div class="faq-answer"><p>Yes! Our tool runs entirely inside your web browser using JavaScript. Your files and passwords are never sent over the internet or stored on our servers. Everything happens locally on your device.</p></div>
+            </div>
+            <div class="faq-item" id="faq-2">
+              <button class="faq-question" aria-expanded="false">
+                <span>Can I unlock a PDF if I forgot the password?</span>
+                <i data-lucide="chevron-down" class="faq-icon"></i>
+              </button>
+              <div class="faq-answer"><p>No. This tool requires the correct password to decrypt the file. We do not support or provide password bypass or cracking functionality of any kind.</p></div>
+            </div>
+            <div class="faq-item" id="faq-3">
+              <button class="faq-question" aria-expanded="false">
+                <span>What happens to my PDF after processing?</span>
+                <i data-lucide="chevron-down" class="faq-icon"></i>
+              </button>
+              <div class="faq-answer"><p>Nothing is stored. Your PDF is processed entirely in your browser memory and immediately available for download. No data is uploaded to any server.</p></div>
+            </div>
+            <div class="faq-item" id="faq-4">
+              <button class="faq-question" aria-expanded="false">
+                <span>Will the unlocked PDF lose any data?</span>
+                <i data-lucide="chevron-down" class="faq-icon"></i>
+              </button>
+              <div class="faq-answer"><p>The content of your PDF is preserved. Our tool renders each page visually and rebuilds the PDF without encryption. Complex elements like interactive forms may be flattened.</p></div>
+            </div>
+            <div class="faq-item" id="faq-5">
+              <button class="faq-question" aria-expanded="false">
+                <span>Can I lock multiple PDFs at once?</span>
+                <i data-lucide="chevron-down" class="faq-icon"></i>
+              </button>
+              <div class="faq-answer"><p>Currently, the security suite processes one PDF at a time. After downloading, click "Start Over" to process another file.</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RELATED TOOLS -->
+  <section class="related-section">
+    <div class="tool-container">
+      <h2 class="related-heading">You Might Also Like</h2>
+      <div class="related-grid">
+        <a href="compress-pdf.html" class="related-card" id="related-compress-pdf">
+          <i data-lucide="archive" class="related-icon" style="color: #f59e0b;"></i>
+          <h3>Compress PDF</h3>
+          <p>Reduce PDF file size without losing quality.</p>
+        </a>
+        <a href="merge-pdf.html" class="related-card" id="related-merge-pdf">
+          <i data-lucide="combine" class="related-icon" style="color: #10b981;"></i>
+          <h3>Merge PDF</h3>
+          <p>Combine multiple PDF files into one document.</p>
+        </a>
+        <a href="sign-pdf.html" class="related-card" id="related-sign-pdf">
+          <i data-lucide="pen-tool" class="related-icon" style="color: #10b981;"></i>
+          <h3>Sign PDF</h3>
+          <p>Add electronic signatures securely.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="index.html" class="nav-logo">
+            <span class="logo-icon">
+              <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+                <rect x="2" y="2" width="24" height="24" rx="6" fill="url(#logoGrad2)" />
+                <path d="M9 14l3 3 7-7" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <defs><linearGradient id="logoGrad2" x1="2" y1="2" x2="26" y2="26"><stop stop-color="#6366f1"/><stop offset="1" stop-color="#a855f7"/></linearGradient></defs>
+              </svg>
+            </span>
+            <span class="logo-text">FreeTools</span>
+          </a>
+          <p class="footer-tagline">Powerful image &amp; PDF tools, free forever.</p>
+        </div>
+        <div class="footer-links-group">
+          <div class="footer-col">
+            <h4>Image Tools</h4>
+            <ul>
+              <li><a href="resize-image.html" id="footer-resize">Resize Image</a></li>
+              <li><a href="image-enhancer.html" id="footer-enhance">Image Enhancer</a></li>
+              <li><a href="bg-remover.html" id="footer-bgremove">Background Remover</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>PDF Tools</h4>
+            <ul>
+              <li><a href="compress-pdf.html" id="footer-compress-pdf">Compress PDF</a></li>
+              <li><a href="merge-pdf.html" id="footer-merge">Merge PDF</a></li>
+              <li><a href="sign-pdf.html" id="footer-sign">Sign PDF</a></li>
+              <li><a href="pdf-security.html" id="footer-security">PDF Security</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Company</h4>
+            <ul>
+              <li><a href="about.html" id="footer-about">About Us</a></li>
+              <li><a href="contact.html" id="footer-contact">Contact Us</a></li>
+              <li><a href="privacy-policy.html" id="footer-privacy">Privacy Policy</a></li>
+              <li><a href="terms-conditions.html" id="footer-terms">Terms &amp; Conditions</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Free Image &amp; PDF Tools. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- tool-page.js handles nav & FAQ accordion -->
+  <script src="tool-page.js"></script>
+  <!-- Main PDF security logic -->
+  <script src="pdf-security.js"></script>
+</body>
+</html>

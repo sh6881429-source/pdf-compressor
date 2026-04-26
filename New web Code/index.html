@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Free online image and PDF tools. Resize, enhance, remove backgrounds, compress, merge, edit, and sign PDFs — all in one place." />
+  <meta name="keywords" content="image tools, pdf tools, resize image, compress pdf, merge pdf, edit pdf, background remover, image enhancer, sign pdf" />
+  <meta name="author" content="Free Image & PDF Tools" />
+  <title>Free Image & PDF Tools — All-in-One Online Toolkit</title>
+
+  <!-- Favicon -->
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <!-- Lucide Icons (lightweight) -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ═══════════════════ NAVBAR ═══════════════════ -->
+  <nav id="navbar" class="navbar">
+    <div class="nav-container">
+      <a href="#" class="nav-logo" id="nav-logo">
+        <span class="logo-icon">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+            <rect x="2" y="2" width="24" height="24" rx="6" fill="url(#logoGrad)" />
+            <path d="M9 14l3 3 7-7" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <defs>
+              <linearGradient id="logoGrad" x1="2" y1="2" x2="26" y2="26">
+                <stop stop-color="#6366f1"/>
+                <stop offset="1" stop-color="#a855f7"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </span>
+        <span class="logo-text">FreeTools</span>
+      </a>
+
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#hero" class="nav-link active" data-section="hero">Home</a></li>
+        <li><a href="#image-tools" class="nav-link" data-section="image-tools">Image Tools</a></li>
+        <li><a href="#pdf-tools" class="nav-link" data-section="pdf-tools">PDF Tools</a></li>
+        <li><a href="#about" class="nav-link" data-section="about">About</a></li>
+        <li><a href="#contact" class="nav-link" data-section="contact">Contact</a></li>
+      </ul>
+
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation menu">
+        <span class="hamburger"></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ═══════════════════ HERO ═══════════════════ -->
+  <section id="hero" class="hero">
+    <div class="hero-bg-shapes">
+      <div class="shape shape-1"></div>
+      <div class="shape shape-2"></div>
+      <div class="shape shape-3"></div>
+    </div>
+    <div class="hero-container">
+      <div class="hero-badge">
+        <span class="badge-dot"></span>
+        100% Free — No Sign-up Required
+      </div>
+      <h1 class="hero-title">
+        All-in-One Free<br />
+        <span class="gradient-text">Image & PDF Tools</span>
+      </h1>
+      <p class="hero-subtitle">
+        Resize, enhance, remove backgrounds, compress, merge, edit, and sign PDFs — powerful tools right in your browser. Fast, secure, and completely free.
+      </p>
+      <div class="hero-actions">
+        <a href="#image-tools" class="btn btn-primary" id="hero-cta-image">
+          <i data-lucide="image" class="btn-icon"></i>
+          Image Tools
+        </a>
+        <a href="#pdf-tools" class="btn btn-secondary" id="hero-cta-pdf">
+          <i data-lucide="file-text" class="btn-icon"></i>
+          PDF Tools
+        </a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat">
+          <span class="stat-number" data-count="50">0</span><span class="stat-suffix">K+</span>
+          <span class="stat-label">Files Processed</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <span class="stat-number" data-count="7">0</span>
+          <span class="stat-label">Powerful Tools</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <span class="stat-number" data-count="100">0</span><span class="stat-suffix">%</span>
+          <span class="stat-label">Free Forever</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ IMAGE TOOLS ═══════════════════ -->
+  <section id="image-tools" class="tools-section">
+    <div class="section-container">
+      <div class="section-header">
+        <span class="section-tag">
+          <i data-lucide="image" class="tag-icon"></i>
+          Image Tools
+        </span>
+        <h2 class="section-title">Transform Your Images</h2>
+        <p class="section-desc">Professional-grade image editing tools, powered entirely in your browser.</p>
+      </div>
+      <div class="tools-grid tools-grid--2col">
+
+        <!-- Resize Image -->
+        <article class="tool-card" id="tool-resize-image" data-tool="resize">
+          <div class="card-glow"></div>
+          <div class="card-icon card-icon--blue">
+            <i data-lucide="maximize-2"></i>
+          </div>
+          <h3 class="card-title">Resize Image</h3>
+          <p class="card-desc">Change image dimensions quickly. Maintain aspect ratio or set custom sizes.</p>
+          <div class="card-tags">
+            <span class="tag">JPG</span><span class="tag">PNG</span><span class="tag">WebP</span>
+          </div>
+          <a href="resize-image.html" class="card-link" aria-label="Use Resize Image tool">
+            Try Now <i data-lucide="arrow-right" class="link-arrow"></i>
+          </a>
+        </article>
+
+        <!-- Image Enhancer -->
+        <article class="tool-card" id="tool-image-enhancer" data-tool="enhance">
+          <div class="card-glow"></div>
+          <div class="card-icon card-icon--purple">
+            <i data-lucide="sparkles"></i>
+          </div>
+          <h3 class="card-title">Image Enhancer</h3>
+          <p class="card-desc">Sharpen, brighten, and upscale images with one click using AI-powered tools.</p>
+          <div class="card-tags">
+            <span class="tag">AI</span><span class="tag">HD</span><span class="tag">Auto</span>
+          </div>
+          <a href="image-enhancer.html" class="card-link" aria-label="Use Image Enhancer tool">
+            Try Now <i data-lucide="arrow-right" class="link-arrow"></i>
+          </a>
+        </article>
+
+        <!-- Background Remover -->
+        <article class="tool-card" id="tool-bg-remover" data-tool="bgremove">
+          <div class="card-glow"></div>
+          <div class="card-icon card-icon--rose">
+            <i data-lucide="eraser"></i>
+          </div>
+          <h3 class="card-title">Background Remover</h3>
+          <p class="card-desc">Automatically remove image backgrounds in seconds. Perfect for product photos.</p>
+          <div class="card-tags">
+            <span class="tag">AI</span><span class="tag">PNG</span><span class="tag">Instant</span>
+          </div>
+          <a href="bg-remover.html" class="card-link" aria-label="Use Background Remover tool">
+            Try Now <i data-lucide="arrow-right" class="link-arrow"></i>
+          </a>
+        </article>
+
+        <!-- Image Compressor -->
+        <article class="tool-card" id="tool-image-compressor" data-tool="compress-image">
+          <div class="card-glow"></div>
+          <div class="card-icon card-icon--emerald">
+            <i data-lucide="file-down"></i>
+          </div>
+          <h3 class="card-title">Image Compressor</h3>
+          <p class="card-desc">Reduce image file size without sacrificing quality. Perfect for web optimization and faster loading.</p>
+          <div class="card-tags">
+            <span class="tag">Lossless</span><span class="tag">Batch</span><span class="tag">WebP</span>
+          </div>
+          <a href="compress-image.html" class="card-link" aria-label="Use Image Compressor tool">
+            Try Now <i data-lucide="arrow-right" class="link-arrow"></i>
+          </a>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ PDF TOOLS ═══════════════════ -->
+  <section id="pdf-tools" class="tools-section tools-section--alt">
+    <div class="section-container">
+      <div class="section-header">
+        <span class="section-tag section-tag--amber">
+          <i data-lucide="file-text" class="tag-icon"></i>
+          PDF Tools
+        </span>
+        <h2 class="section-title">Master Your PDFs</h2>
+        <p class="section-desc">Everything you need to work with PDF files — no software installation required.</p>
+      </div>
+      <div class="tools-grid tools-grid--2col">
+
+        <!-- Compress PDF -->
+        <article class="tool-card" id="tool-compress-pdf" data-tool="compress">
+          <div class="card-glow"></div>
+          <div class="card-icon card-icon--amber">
+            <i data-lucide="archive"></i>
+          </div>
+          <h3 class="card-title">Compress PDF</h3>
+          <p class="card-desc">Reduce PDF file size without losing quality. Perfect for email attachments.</p>
+          <div class="card-tags">
+            <span class="tag">Fast</span><span class="tag">Lossless</span><span class="tag">Batch</span>
+          </div>
+          <a href="compress-pdf.html" class="card-link" aria-label="Use Compress PDF tool">
+            Try Now <i data-lucide="arrow-right" class="link-arrow"></i>
+          </a>
+        </article>
+
+        <!-- Merge PDF -->
+        <article class="tool-card" id="tool-merge-pdf" data-tool="merge">
+          <div class="card-glow"></div>
+          <div class="card-icon card-icon--emerald">
+            <i data-lucide="combine"></i>
+          </div>
+          <h3 class="card-title">Merge PDF</h3>
+          <p class="card-desc">Combine multiple PDF files into one document. Drag and drop to reorder pages.</p>
+          <div class="card-tags">
+            <span class="tag">Drag & Drop</span><span class="tag">Reorder</span>
+          </div>
+          <a href="merge-pdf.html" class="card-link" aria-label="Use Merge PDF tool">
+            Try Now <i data-lucide="arrow-right" class="link-arrow"></i>
+          </a>
+        </article>
+
+
+
+        <!-- PDF Security -->
+        <article class="tool-card" id="tool-security-pdf" data-tool="security">
+          <div class="card-glow"></div>
+          <div class="card-icon card-icon--blue">
+            <i data-lucide="shield-check"></i>
+          </div>
+          <h3 class="card-title">PDF Security Suite</h3>
+          <p class="card-desc">Lock your PDF with a password or unlock it to remove restrictions securely.</p>
+          <div class="card-tags">
+            <span class="tag">Lock</span><span class="tag">Unlock</span><span class="tag">AES Encryption</span>
+          </div>
+          <a href="pdf-security.html" class="card-link" aria-label="Use PDF Security tool">
+            Try Now <i data-lucide="arrow-right" class="link-arrow"></i>
+          </a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ ABOUT ═══════════════════ -->
+  <section id="about" class="about-section">
+    <div class="section-container">
+      <div class="about-grid">
+        <div class="about-content">
+          <span class="section-tag">
+            <i data-lucide="info" class="tag-icon"></i>
+            About Us
+          </span>
+          <h2 class="section-title">Built for Speed.<br />Designed for Everyone.</h2>
+          <p class="about-text">
+            We believe powerful tools should be accessible to everyone. Our browser-based toolkit processes your files locally — your data never leaves your device. No uploads, no servers, no tracking. Just fast, free tools that respect your privacy.
+          </p>
+          <div class="about-features">
+            <div class="feature">
+              <div class="feature-icon"><i data-lucide="shield-check"></i></div>
+              <div>
+                <h4>100% Private</h4>
+                <p>All processing happens in your browser. Files never leave your device.</p>
+              </div>
+            </div>
+            <div class="feature">
+              <div class="feature-icon"><i data-lucide="zap"></i></div>
+              <div>
+                <h4>Lightning Fast</h4>
+                <p>No waiting for server uploads. Instant results with client-side processing.</p>
+              </div>
+            </div>
+            <div class="feature">
+              <div class="feature-icon"><i data-lucide="heart"></i></div>
+              <div>
+                <h4>Free Forever</h4>
+                <p>No subscriptions, no hidden fees. Every tool is free to use, always.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="about-visual">
+          <div class="visual-card">
+            <div class="visual-rings">
+              <div class="ring ring-1"></div>
+              <div class="ring ring-2"></div>
+              <div class="ring ring-3"></div>
+            </div>
+            <div class="visual-center">
+              <i data-lucide="layers" class="visual-icon"></i>
+              <span>7 Tools</span>
+              <span class="visual-sub">One Platform</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ CONTACT ═══════════════════ -->
+  <section id="contact" class="contact-section">
+    <div class="section-container">
+      <div class="section-header">
+        <span class="section-tag section-tag--emerald">
+          <i data-lucide="mail" class="tag-icon"></i>
+          Contact
+        </span>
+        <h2 class="section-title">Get in Touch</h2>
+        <p class="section-desc">Have questions, feedback, or feature requests? We'd love to hear from you.</p>
+      </div>
+      <div class="contact-grid">
+        <form class="contact-form" id="contact-form">
+          <div class="form-group">
+            <label for="contact-name">Your Name</label>
+            <input type="text" id="contact-name" placeholder="John Doe" required />
+          </div>
+          <div class="form-group">
+            <label for="contact-email">Email Address</label>
+            <input type="email" id="contact-email" placeholder="john@example.com" required />
+          </div>
+          <div class="form-group">
+            <label for="contact-message">Message</label>
+            <textarea id="contact-message" rows="5" placeholder="Tell us what you think..." required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary btn-full" id="contact-submit">
+            <i data-lucide="send" class="btn-icon"></i>
+            Send Message
+          </button>
+        </form>
+        <div class="contact-info">
+          <div class="info-card">
+            <i data-lucide="mail"></i>
+            <h4>Email</h4>
+            <p>hello@freetools.dev</p>
+          </div>
+          <div class="info-card">
+            <i data-lucide="map-pin"></i>
+            <h4>Location</h4>
+            <p>Available Worldwide</p>
+          </div>
+          <div class="info-card">
+            <i data-lucide="clock"></i>
+            <h4>Response Time</h4>
+            <p>Within 24 hours</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ SCROLL TO TOP ═══════════════════ -->
+  <button class="scroll-top" id="scroll-top" aria-label="Scroll to top">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"/></svg>
+  </button>
+
+  <!-- ═══════════════════ FOOTER ═══════════════════ -->
+  <footer id="footer" class="footer">
+    <div class="footer-container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="#" class="nav-logo">
+            <span class="logo-icon">
+              <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+                <rect x="2" y="2" width="24" height="24" rx="6" fill="url(#logoGrad2)" />
+                <path d="M9 14l3 3 7-7" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <defs>
+                  <linearGradient id="logoGrad2" x1="2" y1="2" x2="26" y2="26">
+                    <stop stop-color="#6366f1"/>
+                    <stop offset="1" stop-color="#a855f7"/>
+                  </linearGradient>
+                </defs>
+              </svg>
+            </span>
+            <span class="logo-text">FreeTools</span>
+          </a>
+          <p class="footer-tagline">Powerful image & PDF tools, free forever.</p>
+        </div>
+        <div class="footer-links-group">
+          <div class="footer-col">
+            <h4>Image Tools</h4>
+            <ul>
+              <li><a href="resize-image.html" id="footer-resize">Resize Image</a></li>
+              <li><a href="image-enhancer.html" id="footer-enhance">Image Enhancer</a></li>
+              <li><a href="compress-image.html" id="footer-compress-image">Image Compressor</a></li>
+              <li><a href="bg-remover.html" id="footer-bgremove">Background Remover</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>PDF Tools</h4>
+            <ul>
+              <li><a href="compress-pdf.html" id="footer-compress-pdf">Compress PDF</a></li>
+              <li><a href="merge-pdf.html" id="footer-merge">Merge PDF</a></li>
+
+              <li><a href="pdf-security.html" id="footer-security">PDF Security</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Company</h4>
+            <ul>
+              <li><a href="about.html" id="footer-about">About Us</a></li>
+              <li><a href="contact.html" id="footer-contact">Contact Us</a></li>
+              <li><a href="privacy-policy.html" id="footer-privacy">Privacy Policy</a></li>
+              <li><a href="terms-conditions.html" id="footer-terms">Terms & Conditions</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Free Image & PDF Tools. All rights reserved.</p>
+        <div class="footer-socials">
+          <a href="#" aria-label="Twitter" id="social-twitter"><i data-lucide="twitter"></i></a>
+          <a href="#" aria-label="GitHub" id="social-github"><i data-lucide="github"></i></a>
+          <a href="#" aria-label="LinkedIn" id="social-linkedin"><i data-lucide="linkedin"></i></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

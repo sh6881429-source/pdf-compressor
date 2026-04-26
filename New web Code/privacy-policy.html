@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Privacy Policy for FreeTools. We value your privacy. No file storage, no data collection, and 100% browser-based processing." />
+  <title>Privacy Policy | FreeTools</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+  
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .legal-content {
+      padding: 120px 0 80px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .legal-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 48px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+    .legal-title {
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: 24px;
+      background: linear-gradient(135deg, #fff 0%, #a5a5a5 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .legal-section {
+      margin-bottom: 40px;
+    }
+    .legal-section h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      color: var(--emerald);
+    }
+    .legal-section p {
+      color: var(--text-muted);
+      line-height: 1.8;
+      margin-bottom: 16px;
+    }
+    .legal-section ul {
+      margin-bottom: 16px;
+      padding-left: 20px;
+    }
+    .legal-section li {
+      color: var(--text-muted);
+      margin-bottom: 8px;
+      list-style-type: disc;
+    }
+    .last-updated {
+      font-size: 0.9rem;
+      color: var(--text-dim);
+      margin-bottom: 32px;
+      display: block;
+    }
+    @media (max-width: 768px) {
+      .legal-card { padding: 24px; }
+      .legal-title { font-size: 2rem; }
+    }
+  </style>
+</head>
+<body>
+  <nav id="navbar" class="navbar scrolled">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <span class="logo-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="2" y="2" width="24" height="24" rx="6" fill="url(#logoGrad)" /><path d="M9 14l3 3 7-7" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><defs><linearGradient id="logoGrad" x1="2" y1="2" x2="26" y2="26"><stop stop-color="#6366f1"/><stop offset="1" stop-color="#a855f7"/></linearGradient></defs></svg></span>
+        <span class="logo-text">FreeTools</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="legal-content">
+    <div class="container">
+      <div class="legal-card">
+        <span class="last-updated">Last Updated: April 23, 2026</span>
+        <h1 class="legal-title">Privacy Policy</h1>
+        
+        <div class="legal-section">
+          <h2>1. No File Storage Policy</h2>
+          <p>At FreeTools, your privacy is our highest priority. Unlike many online tools, we operate under a strict "No File Storage" policy. All image and PDF processing is performed locally in your web browser using JavaScript and WebAssembly.</p>
+          <p>This means your files are <strong>never uploaded to our servers</strong>. The data stays entirely on your device during the entire process.</p>
+        </div>
+
+        <div class="legal-section">
+          <h2>2. Files Auto-Deleted</h2>
+          <p>Since your files are processed client-side, they only exist in your browser's temporary memory. As soon as you close the browser tab or refresh the page, all file data is automatically cleared by the browser. We do not maintain any cache or permanent storage of your documents or images.</p>
+        </div>
+
+        <div class="legal-section">
+          <h2>3. No Personal Data Collection</h2>
+          <p>We do not require you to create an account, provide an email address, or share any personal information to use our tools. We do not track individual users or build profiles. Our tools are designed to be completely anonymous.</p>
+        </div>
+
+        <div class="legal-section">
+          <h2>4. Use of Cookies & Advertising</h2>
+          <p>To keep our tools free for everyone, we may show advertisements via services like Google AdSense. These services may use cookies to serve ads based on your prior visits to this website or other websites on the Internet.</p>
+          <ul>
+            <li>Google's use of advertising cookies enables it and its partners to serve ads to you based on your visit to our site and/or other sites on the Internet.</li>
+            <li>You may opt out of personalized advertising by visiting <a href="https://www.google.com/settings/ads" style="color:var(--emerald)">Ads Settings</a>.</li>
+          </ul>
+        </div>
+
+        <div class="legal-section">
+          <h2>5. Contact Us</h2>
+          <p>If you have any questions about this Privacy Policy, please contact us at privacy@freetools.dev.</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-bottom">
+        <p>&copy; 2026 Free Image & PDF Tools. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      if (window.lucide) lucide.createIcons();
+    });
+  </script>
+</body>
+</html>

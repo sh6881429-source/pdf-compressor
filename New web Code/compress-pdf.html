@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Compress PDF files online for free. Reduce PDF file size without losing quality using our fast, secure, browser-based PDF compressor." />
+  <meta name="keywords" content="compress pdf, reduce pdf size, shrink pdf, pdf compressor online, make pdf smaller, free pdf tools" />
+  <meta name="author" content="Free Image & PDF Tools" />
+  <title>Compress PDF Online Free | Reduce PDF File Size | FreeTools</title>
+
+  <meta property="og:title" content="Free PDF Compressor — Shrink Files Instantly" />
+  <meta property="og:description" content="Reduce your PDF file size locally in your browser. 100% free, secure, and lightning fast." />
+  <meta property="og:type" content="website" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  
+  <!-- Lucide Icons (NO defer — must be sync so lucide.createIcons() is available) -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  
+  <!-- PDF.js for rendering PDF pages -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  
+  <!-- PDF-Lib for rebuilding compressed PDFs -->
+  <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+  <!-- workerSrc is set inside compress-pdf.js DOMContentLoaded to avoid race condition -->
+
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="tool-page.css" />
+  <link rel="stylesheet" href="compress-pdf.css" />
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav id="navbar" class="navbar scrolled">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo" id="nav-logo">
+        <span class="logo-icon">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+            <rect x="2" y="2" width="24" height="24" rx="6" fill="url(#logoGrad)" />
+            <path d="M9 14l3 3 7-7" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <defs><linearGradient id="logoGrad" x1="2" y1="2" x2="26" y2="26"><stop stop-color="#6366f1"/><stop offset="1" stop-color="#a855f7"/></linearGradient></defs>
+          </svg>
+        </span>
+        <span class="logo-text">FreeTools</span>
+      </a>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="index.html#image-tools" class="nav-link">Image Tools</a></li>
+        <li><a href="index.html#pdf-tools" class="nav-link active">PDF Tools</a></li>
+        <li><a href="about.html" class="nav-link">About</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+      </ul>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation menu">
+        <span class="hamburger"></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- TOOL HERO -->
+  <section class="tool-hero">
+    <div class="tool-container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="index.html">Home</a>
+        <i data-lucide="chevron-right" class="breadcrumb-sep"></i>
+        <a href="index.html#pdf-tools">PDF Tools</a>
+        <i data-lucide="chevron-right" class="breadcrumb-sep"></i>
+        <span class="breadcrumb-current">Compress PDF</span>
+      </nav>
+      <div class="tool-hero-content">
+        <div class="tool-hero-icon tool-hero-icon--emerald">
+          <i data-lucide="file-down"></i>
+        </div>
+        <h1 class="tool-hero-title">Compress PDF Online</h1>
+        <p class="tool-hero-desc">
+          Reduce the file size of your PDF documents instantly. Perfect for email attachments and web uploads. Processed securely in your browser.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- UPLOAD ZONE -->
+  <section class="tool-workspace">
+    <div class="tool-container">
+
+      <div class="upload-zone" id="upload-zone">
+        <!-- Preview shown after file is selected -->
+        <div class="upload-preview" id="upload-preview">
+          <div class="upload-preview-pdf-icon">
+            <i data-lucide="file-text"></i>
+          </div>
+          <div class="upload-preview-info">
+            <span class="upload-preview-name" id="upload-preview-name"></span>
+            <span class="upload-preview-size" id="upload-preview-size"></span>
+          </div>
+          <button class="upload-remove-btn" id="upload-remove-btn" title="Remove file">
+            <i data-lucide="x"></i>
+          </button>
+        </div>
+        <!-- Default empty state -->
+        <div class="upload-zone-inner">
+          <div class="upload-icon-wrap">
+            <i data-lucide="file-plus" class="upload-icon"></i>
+          </div>
+          <h3 class="upload-title">Drop your PDF here</h3>
+          <p class="upload-hint">or click to browse — Max file size 200 MB</p>
+          <label class="btn btn-primary upload-btn" for="file-input">
+            <i data-lucide="folder-open" class="btn-icon"></i>
+            Select PDF File
+          </label>
+          <input type="file" id="file-input" accept="application/pdf" hidden />
+        </div>
+      </div>
+
+      <!-- SETTINGS PANEL -->
+      <div class="settings-panel" id="settings-panel" style="display: none;">
+        <div class="file-info-bar">
+          <div class="file-info-left">
+            <i data-lucide="file-text" class="file-icon"></i>
+            <span id="selected-file-name" class="file-name-text">document.pdf</span>
+          </div>
+          <span id="selected-file-size" class="file-size-text">0 KB</span>
+        </div>
+
+        <div class="compression-target-box">
+          <h3 class="comp-heading">Set Target File Size</h3>
+          <p class="comp-desc">Enter the approximate size you want for the compressed PDF.</p>
+          
+          <div class="target-input-group">
+            <input type="number" id="target-size-input" class="target-input" min="1" placeholder="e.g. 150" />
+            <span class="target-unit">KB</span>
+          </div>
+          <p class="target-hint" id="target-hint">Recommended: <span id="rec-size">--</span> KB</p>
+        </div>
+
+        <div class="action-buttons mt-24">
+          <button class="btn btn-secondary" id="cancel-btn">Cancel</button>
+          <button class="btn btn-primary" id="start-compress-btn" style="flex: 2;">
+            <i data-lucide="file-down" class="btn-icon"></i> Compress PDF
+          </button>
+        </div>
+      </div>
+
+      <!-- PROCESSING OVERLAY -->
+      <div class="processing-panel" id="processing-panel">
+        <div class="processing-spinner"></div>
+        <h3 class="processing-title">Compressing Document...</h3>
+        <p class="processing-desc">Optimizing PDF structure and removing unnecessary metadata. Please wait.</p>
+      </div>
+
+      <!-- RESULT PANEL -->
+      <div class="tool-panel" id="tool-panel">
+        <div class="result-card">
+          <div class="result-header">
+            <div class="result-icon"><i data-lucide="check-circle-2"></i></div>
+            <div class="result-text">
+              <h3>Compression Complete!</h3>
+              <p id="file-name" class="file-name">document.pdf</p>
+            </div>
+          </div>
+          
+          <div class="stats-grid">
+            <div class="stat-box">
+              <span class="stat-label">Original Size</span>
+              <span class="stat-value text-muted" id="orig-size">0 KB</span>
+            </div>
+            <div class="stat-box stat-arrow">
+              <i data-lucide="arrow-right"></i>
+            </div>
+            <div class="stat-box highlight">
+              <span class="stat-label">New Size</span>
+              <span class="stat-value text-emerald" id="new-size">0 KB</span>
+            </div>
+            <div class="stat-box saving">
+              <span class="stat-label">Saved</span>
+              <span class="stat-value text-rose" id="saved-percent">0%</span>
+            </div>
+          </div>
+
+          <div class="action-buttons">
+            <button class="btn btn-secondary" id="reset-tool-btn">
+              <i data-lucide="rotate-ccw" class="btn-icon"></i> Start Over
+            </button>
+            <button class="btn btn-download" id="download-btn">
+              <i data-lucide="download" class="btn-icon"></i> Download Compressed PDF
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SEO CONTENT -->
+  <section class="seo-section">
+    <div class="tool-container">
+      <div class="seo-content">
+        <h2>Free PDF Compressor — Shrink Files Without Losing Quality</h2>
+        <p>
+          Large PDF files can be a hassle to deal with. They bounce back from email servers, take forever to upload, and consume valuable storage space. Our <strong>free online PDF compressor</strong> solves this problem by drastically reducing the size of your documents while maintaining read-ability and visual quality.
+        </p>
+        <p>
+          We use advanced optimization techniques to shrink your PDFs. This includes restructuring the document, stripping out redundant metadata, and consolidating fonts and resources. The result is a much lighter file that is perfectly optimized for the web and email.
+        </p>
+        <p>
+          <strong>Security and Privacy First:</strong> Unlike other PDF tools that force you to upload sensitive documents to their servers, our tool uses client-side JavaScript. This means the entire compression process happens <strong>locally in your web browser</strong>. Your PDF never leaves your device, ensuring complete confidentiality for your personal, legal, or business documents.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq-section">
+    <div class="tool-container">
+      <h2 class="faq-heading">Frequently Asked Questions</h2>
+      <div class="faq-list" id="faq-list">
+        <div class="faq-item" id="faq-1">
+          <button class="faq-question" aria-expanded="false">
+            <span>Will compressing my PDF ruin the quality?</span>
+            <i data-lucide="chevron-down" class="faq-icon"></i>
+          </button>
+          <div class="faq-answer"><p>No. Our compressor focuses on structural optimization, such as removing unused objects and metadata. Text and vector graphics will remain perfectly sharp, and the document will look virtually identical to the original.</p></div>
+        </div>
+        <div class="faq-item" id="faq-2">
+          <button class="faq-question" aria-expanded="false">
+            <span>Is it safe to compress sensitive documents here?</span>
+            <i data-lucide="chevron-down" class="faq-icon"></i>
+          </button>
+          <div class="faq-answer"><p>Yes, it is 100% safe. The compression happens entirely inside your own browser using JavaScript. We do not have servers that store, process, or view your files. Your data remains strictly on your device.</p></div>
+        </div>
+        <div class="faq-item" id="faq-3">
+          <button class="faq-question" aria-expanded="false">
+            <span>Why did my file size barely change?</span>
+            <i data-lucide="chevron-down" class="faq-icon"></i>
+          </button>
+          <div class="faq-answer"><p>If a PDF is already heavily optimized or contains mostly high-resolution flattened images (like a scanned document), structural compression won't be able to reduce it much further. Our tool works best on PDFs with mixed media, excessive metadata, or unoptimized structures.</p></div>
+        </div>
+        <div class="faq-item" id="faq-4">
+          <button class="faq-question" aria-expanded="false">
+            <span>Is there a limit on file size?</span>
+            <i data-lucide="chevron-down" class="faq-icon"></i>
+          </button>
+          <div class="faq-answer"><p>Because the processing happens in your browser's memory, we recommend keeping files under 50MB to prevent your browser from crashing or slowing down, though modern browsers can often handle more.</p></div>
+        </div>
+        <div class="faq-item" id="faq-5">
+          <button class="faq-question" aria-expanded="false">
+            <span>Can I compress multiple PDFs at once?</span>
+            <i data-lucide="chevron-down" class="faq-icon"></i>
+          </button>
+          <div class="faq-answer"><p>Currently, our tool is optimized for high-precision, one-at-a-time compression to ensure the best results. However, since the processing is near-instant, you can quickly cycle through several files.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RELATED TOOLS -->
+  <section class="related-section">
+    <div class="tool-container">
+      <h2 class="related-heading">You Might Also Like</h2>
+      <div class="related-grid">
+        <a href="merge-pdf.html" class="related-card" id="related-merge-pdf">
+          <div class="related-icon related-icon--blue"><i data-lucide="files"></i></div>
+          <div><h4>Merge PDF</h4><p>Combine multiple PDFs into one</p></div>
+          <i data-lucide="arrow-right" class="related-arrow"></i>
+        </a>
+        <a href="pdf-security.html" class="related-card" id="related-security">
+          <div class="related-icon related-icon--blue"><i data-lucide="shield-check"></i></div>
+          <div><h4>PDF Security</h4><p>Lock or unlock your documents</p></div>
+          <i data-lucide="arrow-right" class="related-arrow"></i>
+        </a>
+        <a href="resize-image.html" class="related-card" id="related-resize">
+          <div class="related-icon related-icon--blue"><i data-lucide="maximize-2"></i></div>
+          <div><h4>Resize Image</h4><p>Change dimensions and aspect ratios</p></div>
+          <i data-lucide="arrow-right" class="related-arrow"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="index.html" class="nav-logo">
+            <span class="logo-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="2" y="2" width="24" height="24" rx="6" fill="url(#logoGrad2)" /><path d="M9 14l3 3 7-7" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><defs><linearGradient id="logoGrad2" x1="2" y1="2" x2="26" y2="26"><stop stop-color="#6366f1"/><stop offset="1" stop-color="#a855f7"/></linearGradient></defs></svg></span>
+            <span class="logo-text">FreeTools</span>
+          </a>
+          <p class="footer-tagline">Powerful image & PDF tools, free forever.</p>
+        </div>
+        <div class="footer-links-group">
+          <div class="footer-col"><h4>Image Tools</h4><ul><li><a href="resize-image.html">Resize Image</a></li><li><a href="image-enhancer.html">Image Enhancer</a></li><li><a href="tool-template.html">Image Compressor</a></li><li><a href="bg-remover.html">Background Remover</a></li></ul></div>
+          <div class="footer-col"><h4>PDF Tools</h4><ul><li><a href="compress-pdf.html">Compress PDF</a></li><li><a href="merge-pdf.html">Merge PDF</a></li><li><a href="pdf-security.html">PDF Security</a></li></ul></div>
+          <div class="footer-col"><h4>Company</h4><ul><li><a href="about.html">About Us</a></li><li><a href="contact.html">Contact Us</a></li><li><a href="privacy-policy.html">Privacy Policy</a></li><li><a href="terms-conditions.html">Terms & Conditions</a></li></ul></div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Free Image & PDF Tools. All rights reserved.</p>
+        <div class="footer-socials">
+          <a href="#" aria-label="Twitter"><i data-lucide="twitter"></i></a>
+          <a href="#" aria-label="GitHub"><i data-lucide="github"></i></a>
+          <a href="#" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <button class="scroll-top" id="scroll-top" aria-label="Scroll to top">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"/></svg>
+  </button>
+
+  <script src="compress-pdf.js"></script>
+</body>
+</html>

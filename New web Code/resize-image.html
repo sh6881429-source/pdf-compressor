@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Resize images online for free. Set custom dimensions, use presets for Instagram, YouTube, and passport photos. Maintain aspect ratio. Fast, private, browser-based." />
+  <meta name="keywords" content="resize image online, image resizer, resize photo, instagram size, youtube thumbnail, passport photo size, change image dimensions" />
+  <meta name="author" content="Free Image & PDF Tools" />
+  <title>Resize Image Online Free — Change Image Dimensions | FreeTools</title>
+
+  <meta property="og:title" content="Free Image Resizer — Resize Photos Online Instantly" />
+  <meta property="og:description" content="Resize images to any dimension. Use presets for Instagram, YouTube & passport. 100% free, no sign-up." />
+  <meta property="og:type" content="website" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="tool-page.css" />
+  <link rel="stylesheet" href="resize-image.css" />
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav id="navbar" class="navbar scrolled">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo" id="nav-logo">
+        <span class="logo-icon">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+            <rect x="2" y="2" width="24" height="24" rx="6" fill="url(#logoGrad)" />
+            <path d="M9 14l3 3 7-7" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <defs><linearGradient id="logoGrad" x1="2" y1="2" x2="26" y2="26"><stop stop-color="#6366f1"/><stop offset="1" stop-color="#a855f7"/></linearGradient></defs>
+          </svg>
+        </span>
+        <span class="logo-text">FreeTools</span>
+      </a>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="index.html#image-tools" class="nav-link active">Image Tools</a></li>
+        <li><a href="index.html#pdf-tools" class="nav-link">PDF Tools</a></li>
+        <li><a href="about.html" class="nav-link">About</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+      </ul>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation menu">
+        <span class="hamburger"></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- TOOL HERO -->
+  <section class="tool-hero">
+    <div class="tool-container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="index.html">Home</a>
+        <i data-lucide="chevron-right" class="breadcrumb-sep"></i>
+        <a href="index.html#image-tools">Image Tools</a>
+        <i data-lucide="chevron-right" class="breadcrumb-sep"></i>
+        <span class="breadcrumb-current">Resize Image</span>
+      </nav>
+      <div class="tool-hero-content">
+        <div class="tool-hero-icon tool-hero-icon--blue">
+          <i data-lucide="maximize-2"></i>
+        </div>
+        <h1 class="tool-hero-title">Resize Image Online Free</h1>
+        <p class="tool-hero-desc">
+          Change image dimensions to any size. Use popular presets or enter custom width & height — all processed in your browser.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- UPLOAD ZONE -->
+  <section class="tool-workspace">
+    <div class="tool-container">
+
+      <div class="upload-zone" id="upload-zone">
+        <!-- Preview shown when file is selected -->
+        <div class="upload-preview" id="upload-preview">
+          <img id="upload-preview-img" src="" alt="Preview" />
+          <div class="upload-preview-info">
+            <span class="upload-preview-name" id="upload-preview-name"></span>
+            <span class="upload-preview-size" id="upload-preview-size"></span>
+          </div>
+          <button class="upload-remove-btn" id="upload-remove-btn" title="Remove image">
+            <i data-lucide="x"></i>
+          </button>
+        </div>
+        <!-- Default state shown before file is selected -->
+        <div class="upload-zone-inner">
+          <div class="upload-icon-wrap">
+            <i data-lucide="upload-cloud" class="upload-icon"></i>
+          </div>
+          <h3 class="upload-title">Drop your image here</h3>
+          <p class="upload-hint">or click to browse — JPG, PNG, WebP up to 200 MB</p>
+          <label class="btn btn-primary upload-btn" for="file-input">
+            <i data-lucide="folder-open" class="btn-icon"></i>
+            Choose File
+          </label>
+          <input type="file" id="file-input" accept="image/jpeg,image/png,image/webp" hidden />
+        </div>
+      </div>
+
+      <!-- TOOL PANEL -->
+      <div class="tool-panel" id="tool-panel">
+
+        <!-- Image Info Bar -->
+        <div class="info-bar" id="info-bar">
+          <div class="info-chip">
+            <i data-lucide="image"></i>
+            <span id="file-name">image.jpg</span>
+          </div>
+          <div class="info-chip">
+            <i data-lucide="ruler"></i>
+            Original: <strong id="original-dims">— × —</strong>
+          </div>
+          <div class="info-chip">
+            <i data-lucide="hard-drive"></i>
+            <span id="file-size">—</span>
+          </div>
+        </div>
+
+        <!-- Resize Controls -->
+        <div class="controls-bar">
+          <h3 class="controls-title">
+            <i data-lucide="scaling"></i>
+            Resize Settings
+          </h3>
+
+          <!-- Presets -->
+          <div class="presets-section">
+            <label class="control-label">Quick Presets</label>
+            <div class="presets-grid" id="presets-grid">
+              <button class="preset-btn" data-w="1080" data-h="1080">
+                <i data-lucide="instagram" class="preset-icon"></i>
+                <span>Instagram Post</span>
+                <small>1080 × 1080</small>
+              </button>
+              <button class="preset-btn" data-w="1080" data-h="1350">
+                <i data-lucide="instagram" class="preset-icon"></i>
+                <span>Instagram Portrait</span>
+                <small>1080 × 1350</small>
+              </button>
+              <button class="preset-btn" data-w="1080" data-h="1920">
+                <i data-lucide="smartphone" class="preset-icon"></i>
+                <span>Instagram Story</span>
+                <small>1080 × 1920</small>
+              </button>
+              <button class="preset-btn" data-w="1280" data-h="720">
+                <i data-lucide="youtube" class="preset-icon"></i>
+                <span>YouTube Thumbnail</span>
+                <small>1280 × 720</small>
+              </button>
+              <button class="preset-btn" data-w="2560" data-h="1440">
+                <i data-lucide="monitor" class="preset-icon"></i>
+                <span>YouTube Banner</span>
+                <small>2560 × 1440</small>
+              </button>
+              <button class="preset-btn" data-w="413" data-h="531">
+                <i data-lucide="id-card" class="preset-icon"></i>
+                <span>Passport Photo</span>
+                <small>413 × 531</small>
+              </button>
+              <button class="preset-btn" data-w="1200" data-h="630">
+                <i data-lucide="facebook" class="preset-icon"></i>
+                <span>Facebook Cover</span>
+                <small>1200 × 630</small>
+              </button>
+              <button class="preset-btn" data-w="1500" data-h="500">
+                <i data-lucide="twitter" class="preset-icon"></i>
+                <span>Twitter Header</span>
+                <small>1500 × 500</small>
+              </button>
+            </div>
+          </div>
+
+          <!-- Custom Dimensions -->
+          <div class="dims-section">
+            <label class="control-label">Custom Dimensions (px)</label>
+            <div class="dims-row">
+              <div class="dim-input-group">
+                <label for="width-input">Width</label>
+                <div class="dim-input-wrap">
+                  <input type="number" id="width-input" min="1" max="10000" placeholder="Width" />
+                  <span class="dim-unit">px</span>
+                </div>
+              </div>
+
+              <button class="aspect-lock" id="aspect-lock" title="Lock aspect ratio" aria-label="Toggle aspect ratio lock">
+                <i data-lucide="lock" id="lock-icon"></i>
+              </button>
+
+              <div class="dim-input-group">
+                <label for="height-input">Height</label>
+                <div class="dim-input-wrap">
+                  <input type="number" id="height-input" min="1" max="10000" placeholder="Height" />
+                  <span class="dim-unit">px</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Output Format -->
+          <div class="format-section">
+            <div class="format-row">
+              <div class="control-group">
+                <label for="out-format">Output Format</label>
+                <select id="out-format">
+                  <option value="original">Same as Original</option>
+                  <option value="jpeg">JPEG</option>
+                  <option value="png">PNG</option>
+                  <option value="webp">WebP</option>
+                </select>
+              </div>
+              <div class="control-group">
+                <label for="out-quality">Quality</label>
+                <div class="range-wrap">
+                  <input type="range" id="out-quality" min="10" max="100" value="90" />
+                  <span class="range-value" id="quality-val">90%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <button class="btn btn-primary btn-resize" id="resize-btn">
+            <i data-lucide="scaling" class="btn-icon"></i>
+            Resize Image
+          </button>
+        </div>
+
+        <!-- Preview -->
+        <div class="preview-section" id="preview-section" style="display:none">
+          <h3 class="preview-title">
+            <i data-lucide="eye"></i>
+            Before & After Preview
+          </h3>
+          <div class="ba-container" id="ba-container">
+            <div class="ba-wrapper">
+              <div class="ba-image ba-before"><img id="before-img" src="" alt="Original image" /><span class="ba-label">Original</span></div>
+              <div class="ba-image ba-after" id="ba-after"><img id="after-img" src="" alt="Resized image" /><span class="ba-label ba-label--after">Resized</span></div>
+              <div class="ba-slider" id="ba-slider"><div class="ba-handle"><i data-lucide="grip-vertical"></i></div></div>
+            </div>
+          </div>
+          <div class="result-stats" id="result-stats">
+            <div class="result-stat">
+              <span class="result-stat-label">Original Size</span>
+              <span class="result-stat-value" id="stat-orig-dims">—</span>
+            </div>
+            <div class="result-stat result-stat--arrow"><i data-lucide="arrow-right"></i></div>
+            <div class="result-stat">
+              <span class="result-stat-label">New Size</span>
+              <span class="result-stat-value result-stat-value--green" id="stat-new-dims">—</span>
+            </div>
+            <div class="result-stat result-stat--highlight">
+              <span class="result-stat-label">File Size</span>
+              <span class="result-stat-value result-stat-value--green" id="stat-file-size">—</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Download -->
+        <div class="download-section" id="download-section" style="display:none">
+          <button class="btn btn-download" id="download-btn">
+            <i data-lucide="download" class="btn-icon"></i>
+            Download Resized Image
+          </button>
+          <button class="btn btn-secondary" id="reset-btn">
+            <i data-lucide="refresh-cw" class="btn-icon"></i>
+            Resize Another
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SEO CONTENT -->
+  <section class="seo-section">
+    <div class="tool-container">
+      <div class="seo-content">
+        <h2>Free Online Image Resizer — Resize Any Photo in Seconds</h2>
+        <p>
+          Our <strong>free online image resizer</strong> allows you to change the dimensions of any image directly in your browser. Whether you're preparing images for social media, resizing product photos for an e-commerce store, or creating the perfect passport photo, this tool does it all — instantly and without any software installation.
+        </p>
+        <p>
+          Choose from a range of popular <strong>presets for Instagram, YouTube, Facebook, Twitter, and passport photos</strong>, or enter custom width and height values. The built-in <strong>aspect ratio lock</strong> ensures your images stay proportional, preventing stretching or distortion.
+        </p>
+        <p>
+          All processing happens <strong>100% in your browser</strong> — your images are never uploaded to any server. This means maximum privacy and near-instant results, regardless of your internet speed. You can also convert between JPEG, PNG, and WebP formats and control the output quality for optimal file size.
+        </p>
+        <p>
+          Properly sized images are critical for <strong>web performance and SEO</strong>. Search engines favor fast-loading pages, and oversized images are a top cause of slow page speeds. Use our resizer to ensure every image on your site is perfectly optimized for its container.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq-section">
+    <div class="tool-container">
+      <h2 class="faq-heading">Frequently Asked Questions</h2>
+      <div class="faq-list" id="faq-list">
+        <div class="faq-item" id="faq-1">
+          <button class="faq-question" aria-expanded="false">
+            <span>What image formats can I resize?</span>
+            <i data-lucide="chevron-down" class="faq-icon"></i>
+          </button>
+          <div class="faq-answer"><p>You can resize JPEG, PNG, and WebP images. You can also convert between these formats during the resize process — for example, upload a PNG and download a smaller WebP version.</p></div>
+        </div>
+        <div class="faq-item" id="faq-2">
+          <button class="faq-question" aria-expanded="false">
+            <span>What is the correct Instagram post size?</span>
+            <i data-lucide="chevron-down" class="faq-icon"></i>
+          </button>
+          <div class="faq-answer"><p>Instagram square posts should be 1080 × 1080 pixels. Portrait posts perform best at 1080 × 1350, and Stories should be 1080 × 1920. All of these presets are built into our tool for one-click resizing.</p></div>
+        </div>
+        <div class="faq-item" id="faq-3">
+          <button class="faq-question" aria-expanded="false">
+            <span>Will resizing reduce my image quality?</span>
+            <i data-lucide="chevron-down" class="faq-icon"></i>
+          </button>
+          <div class="faq-answer"><p>Enlarging images beyond their original resolution may reduce sharpness. Downsizing retains quality well. Use the quality slider to control the output — higher values produce better quality but larger files.</p></div>
+        </div>
+        <div class="faq-item" id="faq-4">
+          <button class="faq-question" aria-expanded="false">
+            <span>How does aspect ratio lock work?</span>
+            <i data-lucide="chevron-down" class="faq-icon"></i>
+          </button>
+          <div class="faq-answer"><p>When the aspect ratio lock is enabled (the lock icon is closed), changing the width automatically adjusts the height proportionally, and vice versa. This prevents your image from being stretched or squished. Disable it if you need non-proportional dimensions.</p></div>
+        </div>
+        <div class="faq-item" id="faq-5">
+          <button class="faq-question" aria-expanded="false">
+            <span>What is the standard passport photo size?</span>
+            <i data-lucide="chevron-down" class="faq-icon"></i>
+          </button>
+          <div class="faq-answer"><p>Standard US passport photos are 2 × 2 inches (51 × 51 mm). At 300 DPI, this translates to approximately 413 × 531 pixels. Our passport preset uses these exact dimensions.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RELATED TOOLS -->
+  <section class="related-section">
+    <div class="tool-container">
+      <h2 class="related-heading">You Might Also Like</h2>
+      <div class="related-grid">
+        <a href="image-enhancer.html" class="related-card" id="related-enhance">
+          <div class="related-icon related-icon--purple"><i data-lucide="sparkles"></i></div>
+          <div><h4>Image Enhancer</h4><p>Upscale and sharpen photos with AI</p></div>
+          <i data-lucide="arrow-right" class="related-arrow"></i>
+        </a>
+        <a href="bg-remover.html" class="related-card" id="related-bgremove">
+          <div class="related-icon related-icon--rose"><i data-lucide="eraser"></i></div>
+          <div><h4>Background Remover</h4><p>Remove backgrounds in one click</p></div>
+          <i data-lucide="arrow-right" class="related-arrow"></i>
+        </a>
+        <a href="tool-template.html" class="related-card" id="related-compress-img">
+          <div class="related-icon related-icon--amber"><i data-lucide="image-down"></i></div>
+          <div><h4>Image Compressor</h4><p>Reduce file size without quality loss</p></div>
+          <i data-lucide="arrow-right" class="related-arrow"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="index.html" class="nav-logo">
+            <span class="logo-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="2" y="2" width="24" height="24" rx="6" fill="url(#logoGrad2)" /><path d="M9 14l3 3 7-7" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><defs><linearGradient id="logoGrad2" x1="2" y1="2" x2="26" y2="26"><stop stop-color="#6366f1"/><stop offset="1" stop-color="#a855f7"/></linearGradient></defs></svg></span>
+            <span class="logo-text">FreeTools</span>
+          </a>
+          <p class="footer-tagline">Powerful image & PDF tools, free forever.</p>
+        </div>
+        <div class="footer-links-group">
+          <div class="footer-col"><h4>Image Tools</h4><ul><li><a href="resize-image.html">Resize Image</a></li><li><a href="image-enhancer.html">Image Enhancer</a></li><li><a href="tool-template.html">Image Compressor</a></li><li><a href="bg-remover.html">Background Remover</a></li></ul></div>
+          <div class="footer-col"><h4>PDF Tools</h4><ul><li><a href="compress-pdf.html">Compress PDF</a></li><li><a href="merge-pdf.html">Merge PDF</a></li><li><a href="pdf-security.html">PDF Security</a></li></ul></div>
+          <div class="footer-col"><h4>Company</h4><ul><li><a href="about.html">About Us</a></li><li><a href="contact.html">Contact Us</a></li><li><a href="privacy-policy.html">Privacy Policy</a></li><li><a href="terms-conditions.html">Terms & Conditions</a></li></ul></div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Free Image & PDF Tools. All rights reserved.</p>
+        <div class="footer-socials">
+          <a href="#" aria-label="Twitter"><i data-lucide="twitter"></i></a>
+          <a href="#" aria-label="GitHub"><i data-lucide="github"></i></a>
+          <a href="#" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <button class="scroll-top" id="scroll-top" aria-label="Scroll to top">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"/></svg>
+  </button>
+
+  <script src="resize-image.js"></script>
+</body>
+</html>

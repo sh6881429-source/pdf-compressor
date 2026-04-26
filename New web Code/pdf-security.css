@@ -1,0 +1,241 @@
+/* pdf-security.css */
+
+.mode-toggle {
+  display: flex;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 8px;
+  margin-bottom: 24px;
+  gap: 8px;
+}
+
+.mode-btn {
+  flex: 1;
+  padding: 12px 24px;
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  font-weight: 600;
+  font-family: inherit;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: var(--transition);
+}
+
+.mode-btn:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.mode-btn.active {
+  background: var(--emerald);
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+}
+
+.mode-btn.active.lock-mode-active {
+  background: #6366f1; /* Indigo */
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
+}
+
+.mode-btn.active.unlock-mode-active {
+  background: #f59e0b; /* Amber */
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.2);
+}
+
+.security-panel {
+  display: none;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 32px;
+  text-align: left;
+  animation: fadeIn 0.4s ease;
+}
+
+.security-panel.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.panel-header {
+  margin-bottom: 24px;
+}
+
+.panel-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.panel-desc {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.password-input-wrapper {
+  position: relative;
+}
+
+.password-input-wrapper input {
+  width: 100%;
+  background: #09090b;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 12px 40px 12px 16px;
+  color: #fff;
+  font-family: inherit;
+  font-size: 1rem;
+  transition: var(--transition);
+}
+
+.password-input-wrapper input:focus {
+  border-color: #6366f1;
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+}
+
+.toggle-password {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+}
+
+.toggle-password:hover {
+  color: #fff;
+}
+
+/* Password Strength Meter */
+.strength-meter-container {
+  margin-top: 12px;
+}
+
+.strength-bars {
+  display: flex;
+  gap: 4px;
+  height: 6px;
+  margin-bottom: 8px;
+}
+
+.strength-bar {
+  flex: 1;
+  background: var(--border);
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.strength-text {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  text-align: right;
+  font-weight: 500;
+}
+
+/* Strength Levels */
+.strength-weak .strength-bar:nth-child(1) { background: #ef4444; }
+.strength-fair .strength-bar:nth-child(1), .strength-fair .strength-bar:nth-child(2) { background: #f59e0b; }
+.strength-good .strength-bar:nth-child(1), .strength-good .strength-bar:nth-child(2), .strength-good .strength-bar:nth-child(3) { background: #10b981; }
+.strength-strong .strength-bar { background: #10b981; }
+
+.warning-box {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  color: #fca5a5;
+  padding: 16px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  margin-top: 24px;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.warning-box i {
+  color: #ef4444;
+  flex-shrink: 0;
+}
+
+.error-message {
+  color: #ef4444;
+  font-size: 0.85rem;
+  margin-top: 8px;
+  display: none;
+  font-weight: 500;
+}
+
+.action-btn {
+  width: 100%;
+  margin-top: 16px;
+  padding: 14px;
+  font-size: 1.05rem;
+}
+
+/* Download Section Overrides */
+#download-section {
+  text-align: center;
+  padding: 40px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  margin-top: 32px;
+  display: none;
+  animation: fadeIn 0.4s ease;
+}
+
+.success-icon {
+  width: 64px;
+  height: 64px;
+  background: rgba(16, 185, 129, 0.1);
+  color: #10b981;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 24px;
+}
+
+.success-icon i {
+  width: 32px;
+  height: 32px;
+}
+
+#download-btn {
+  display: inline-flex;
+  margin: 0 auto;
+}

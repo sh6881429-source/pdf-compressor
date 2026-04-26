@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Sign PDF files online for free. Draw your signature or upload an image to sign your PDF documents securely in your browser without quality loss." />
+  <meta name="keywords" content="sign pdf, add signature to pdf, e-sign pdf, sign pdf online, free pdf tools" />
+  <meta name="author" content="Free Image & PDF Tools" />
+  <title>Sign PDF Online Free | e-Sign Documents | FreeTools</title>
+
+  <meta property="og:title" content="Free PDF Signer — Add Electronic Signatures" />
+  <meta property="og:description" content="A powerful, free PDF signer. Draw or upload your signature and place it anywhere on your document without uploading it to a server." />
+  <meta property="og:type" content="website" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+  
+  <!-- PDF.js for Rendering PDF Pages -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script>pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';</script>
+  
+  <!-- PDF-Lib for Core PDF Merging/Editing -->
+  <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="tool-page.css" />
+  <link rel="stylesheet" href="sign-pdf.css" />
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav id="navbar" class="navbar scrolled">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo" id="nav-logo">
+        <span class="logo-icon">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+            <rect x="2" y="2" width="24" height="24" rx="6" fill="url(#logoGrad)" />
+            <path d="M9 14l3 3 7-7" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <defs><linearGradient id="logoGrad" x1="2" y1="2" x2="26" y2="26"><stop stop-color="#6366f1"/><stop offset="1" stop-color="#a855f7"/></linearGradient></defs>
+          </svg>
+        </span>
+        <span class="logo-text">FreeTools</span>
+      </a>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="index.html#image-tools" class="nav-link">Image Tools</a></li>
+        <li><a href="index.html#pdf-tools" class="nav-link active">PDF Tools</a></li>
+        <li><a href="about.html" class="nav-link">About</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+      </ul>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation menu">
+        <span class="hamburger"></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- TOOL HERO -->
+  <section class="tool-hero">
+    <div class="tool-container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="index.html">Home</a>
+        <i data-lucide="chevron-right" class="breadcrumb-sep"></i>
+        <a href="index.html#pdf-tools">PDF Tools</a>
+        <i data-lucide="chevron-right" class="breadcrumb-sep"></i>
+        <span class="breadcrumb-current">Sign PDF</span>
+      </nav>
+      <div class="tool-hero-content">
+        <div class="tool-hero-icon tool-hero-icon--emerald">
+          <i data-lucide="pen-tool"></i>
+        </div>
+        <h1 class="tool-hero-title">Sign PDF Documents</h1>
+        <p class="tool-hero-desc">
+          Add an electronic signature to your document securely. Draw your signature or upload an image, and place it perfectly. Retains 100% original PDF quality.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORKSPACE -->
+  <section class="tool-workspace">
+    <div class="tool-container">
+
+      <!-- INITIAL UPLOAD ZONE -->
+      <div class="upload-zone" id="initial-upload-zone">
+        <div class="upload-zone-inner">
+          <div class="upload-icon-wrap">
+            <i data-lucide="file-signature" class="upload-icon"></i>
+          </div>
+          <h3 class="upload-title">Select a PDF to Sign</h3>
+          <p class="upload-hint">Drop your PDF file here or click to browse</p>
+          <label class="btn btn-primary upload-btn" for="initial-file-input">
+            <i data-lucide="folder-open" class="btn-icon"></i>
+            Choose File
+          </label>
+          <input type="file" id="initial-file-input" accept="application/pdf" hidden />
+        </div>
+      </div>
+
+      <!-- EDITOR PANEL -->
+      <div id="app" style="display: none;">
+        
+        <!-- Toolbar -->
+        <div class="editor-toolbar">
+          <div class="toolbar-group">
+            <button class="toolbar-btn" id="add-sign-btn" title="Create Signature">
+              <i data-lucide="pen-tool"></i> Add Signature
+            </button>
+          </div>
+          <div class="toolbar-group">
+            <button class="toolbar-btn" id="zoom-out-btn" title="Zoom Out">
+              <i data-lucide="zoom-out"></i>
+            </button>
+            <span id="zoom-level">100%</span>
+            <button class="toolbar-btn" id="zoom-in-btn" title="Zoom In">
+              <i data-lucide="zoom-in"></i>
+            </button>
+          </div>
+          <div class="toolbar-group">
+            <button class="toolbar-btn" id="fullscreen-btn" title="Toggle Full Screen">
+              <i data-lucide="maximize"></i> Full Screen
+            </button>
+          </div>
+          <div class="toolbar-group">
+            <button class="btn btn-primary btn-sm" id="save-pdf-btn">
+              <i data-lucide="download" class="btn-icon"></i> Download Signed PDF
+            </button>
+          </div>
+        </div>
+
+        <!-- PDF Viewer Container -->
+        <div id="pdfContainer">
+          <div class="pdf-pages-wrapper" id="pdf-pages-wrapper">
+            <!-- Pages will be rendered here dynamically -->
+          </div>
+        </div>
+
+      </div>
+
+      <!-- PROCESSING OVERLAY -->
+      <div class="processing-panel" id="processing-panel">
+        <div class="processing-spinner"></div>
+        <h3 class="processing-title">Signing Document...</h3>
+        <p class="processing-desc">Embedding your signature seamlessly into the PDF.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SIGNATURE MODAL -->
+  <div class="modal-overlay" id="sign-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Create Your Signature</h3>
+        <button class="modal-close" id="close-modal-btn"><i data-lucide="x"></i></button>
+      </div>
+      <div class="modal-body">
+        <div class="sign-tabs">
+          <button class="sign-tab active" id="tab-draw">Draw</button>
+          <button class="sign-tab" id="tab-upload">Upload Image</button>
+        </div>
+        
+        <!-- Draw View -->
+        <div class="sign-view active" id="view-draw">
+          <canvas id="signature-pad" width="500" height="200"></canvas>
+          <button class="btn btn-secondary btn-sm clear-btn" id="clear-sign-btn">Clear</button>
+        </div>
+
+        <!-- Upload View -->
+        <div class="sign-view" id="view-upload" style="display: none;">
+          <div class="upload-sig-box" id="upload-sig-box">
+            <i data-lucide="image" class="upload-icon"></i>
+            <p>Click to upload signature (PNG/JPG)</p>
+            <input type="file" id="sig-image-input" accept="image/png, image/jpeg" hidden />
+          </div>
+          <div id="sig-image-preview-container" style="display: none; text-align: center;">
+            <img id="sig-image-preview" src="" alt="Signature Preview" style="max-height: 120px; max-width: 100%; border: 1px solid var(--border); border-radius: var(--radius-sm);" />
+            <br/><br/>
+            <button class="btn btn-secondary btn-sm clear-btn" id="remove-img-btn">Remove Image</button>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary btn-sm" id="save-sign-btn">Insert Signature</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SEO CONTENT -->
+  <section class="seo-section">
+    <div class="tool-container">
+      <div class="seo-content">
+        <h2>Free PDF Signer — Add Electronic Signatures Safely</h2>
+        <p>
+          Need to sign a contract, NDA, or official form? Our <strong>free online PDF Signer</strong> allows you to legally bind electronic signatures to your PDF documents instantly. You don't need to print, sign, and scan your documents anymore, preserving 100% of the original document's vector quality.
+        </p>
+        <p>
+          You can create your signature in two ways: draw it naturally using your mouse, trackpad, or touchscreen, or simply upload a pre-existing image of your signature. Once created, just drag the signature to the correct signature line and click download!
+        </p>
+        <p>
+          <strong>Total Privacy and Security:</strong> We understand that documents requiring a signature are often highly confidential. That is why our PDF signer operates entirely <strong>offline within your browser</strong>. Your files are never uploaded to a server, ensuring no third party can ever access your private contracts or sensitive data.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq-section">
+    <div class="tool-container">
+      <h2 class="faq-heading">Frequently Asked Questions</h2>
+      <div class="faq-list" id="faq-list">
+        <div class="faq-item" id="faq-1">
+          <button class="faq-question" aria-expanded="false">
+            <span>Will this degrade my PDF quality?</span>
+            <i data-lucide="chevron-down" class="faq-icon"></i>
+          </button>
+          <div class="faq-answer"><p>No! While the visual preview on your screen is generated to load quickly, the actual download seamlessly embeds the high-resolution signature directly into your original PDF file. Your text, vectors, and layouts remain perfectly preserved without any compression.</p></div>
+        </div>
+        <div class="faq-item" id="faq-2">
+          <button class="faq-question" aria-expanded="false">
+            <span>Is my digital signature legally binding?</span>
+            <i data-lucide="chevron-down" class="faq-icon"></i>
+          </button>
+          <div class="faq-answer"><p>In most jurisdictions (including the US and EU), electronic signatures are legally binding for most standard contracts, agreements, and forms. However, some highly sensitive government documents may require specialized cryptographic digital certificates.</p></div>
+        </div>
+        <div class="faq-item" id="faq-3">
+          <button class="faq-question" aria-expanded="false">
+            <span>Can I resize my signature?</span>
+            <i data-lucide="chevron-down" class="faq-icon"></i>
+          </button>
+          <div class="faq-answer"><p>Yes! Once the signature is added to the document preview, you can use the corner handles to scale it up or down to perfectly fit the signature line.</p></div>
+        </div>
+        <div class="faq-item" id="faq-4">
+          <button class="faq-question" aria-expanded="false">
+            <span>Are my signed documents stored anywhere?</span>
+            <i data-lucide="chevron-down" class="faq-icon"></i>
+          </button>
+          <div class="faq-answer"><p>Absolutely not. We do not have servers to store your files. All processing is done locally in your browser cache and deleted immediately when you close the tab.</p></div>
+        </div>
+        <div class="faq-item" id="faq-5">
+          <button class="faq-question" aria-expanded="false">
+            <span>Can I add multiple signatures to one PDF?</span>
+            <i data-lucide="chevron-down" class="faq-icon"></i>
+          </button>
+          <div class="faq-answer"><p>Yes, you can create and place as many signatures as you need. Just click the "Add Signature" button again to create a new one or duplicate your existing one on different pages.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RELATED TOOLS -->
+  <section class="related-section">
+    <div class="tool-container">
+      <h2 class="related-heading">You Might Also Like</h2>
+      <div class="related-grid">
+        <a href="compress-pdf.html" class="related-card" id="related-compress-pdf">
+          <div class="related-icon related-icon--amber"><i data-lucide="archive"></i></div>
+          <div><h4>Compress PDF</h4><p>Reduce PDF file size securely</p></div>
+          <i data-lucide="arrow-right" class="related-arrow"></i>
+        </a>
+        <a href="merge-pdf.html" class="related-card" id="related-merge-pdf">
+          <div class="related-icon related-icon--blue"><i data-lucide="files"></i></div>
+          <div><h4>Merge PDF</h4><p>Combine and arrange PDF pages</p></div>
+          <i data-lucide="arrow-right" class="related-arrow"></i>
+        </a>
+        <a href="resize-image.html" class="related-card" id="related-resize">
+          <div class="related-icon related-icon--blue"><i data-lucide="maximize-2"></i></div>
+          <div><h4>Resize Image</h4><p>Change dimensions and aspect ratios</p></div>
+          <i data-lucide="arrow-right" class="related-arrow"></i>
+        </a>
+        <a href="bg-remover.html" class="related-card" id="related-bgremove">
+          <div class="related-icon related-icon--rose"><i data-lucide="eraser"></i></div>
+          <div><h4>Background Remover</h4><p>AI-powered transparent backgrounds</p></div>
+          <i data-lucide="arrow-right" class="related-arrow"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="index.html" class="nav-logo">
+            <span class="logo-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="2" y="2" width="24" height="24" rx="6" fill="url(#logoGrad2)" /><path d="M9 14l3 3 7-7" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><defs><linearGradient id="logoGrad2" x1="2" y1="2" x2="26" y2="26"><stop stop-color="#6366f1"/><stop offset="1" stop-color="#a855f7"/></linearGradient></defs></svg></span>
+            <span class="logo-text">FreeTools</span>
+          </a>
+          <p class="footer-tagline">Powerful image & PDF tools, free forever.</p>
+        </div>
+        <div class="footer-links-group">
+          <div class="footer-col"><h4>Image Tools</h4><ul><li><a href="resize-image.html">Resize Image</a></li><li><a href="image-enhancer.html">Image Enhancer</a></li><li><a href="tool-template.html">Image Compressor</a></li><li><a href="bg-remover.html">Background Remover</a></li></ul></div>
+          <div class="footer-col"><h4>PDF Tools</h4><ul><li><a href="compress-pdf.html">Compress PDF</a></li><li><a href="merge-pdf.html">Merge PDF</a></li><li><a href="sign-pdf.html">Sign PDF</a></li></ul></div>
+          <div class="footer-col"><h4>Company</h4><ul><li><a href="about.html">About Us</a></li><li><a href="contact.html">Contact Us</a></li><li><a href="privacy-policy.html">Privacy Policy</a></li><li><a href="terms-conditions.html">Terms & Conditions</a></li></ul></div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Free Image & PDF Tools. All rights reserved.</p>
+        <div class="footer-socials">
+          <a href="#" aria-label="Twitter"><i data-lucide="twitter"></i></a>
+          <a href="#" aria-label="GitHub"><i data-lucide="github"></i></a>
+          <a href="#" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="sign-pdf.js"></script>
+</body>
+</html>

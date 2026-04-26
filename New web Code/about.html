@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="About FreeTools. Learn about our mission to provide fast, secure, and free image and PDF processing tools that respect your privacy." />
+  <title>About Us | Our Mission | FreeTools</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+  
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="tool-page.css" />
+  <style>
+    .about-page-content {
+      padding: 120px 0 80px;
+    }
+    .about-hero {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+    .about-hero h1 {
+      font-size: 3.5rem;
+      font-weight: 900;
+      margin-bottom: 24px;
+      background: linear-gradient(135deg, #fff 0%, #6366f1 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .about-hero p {
+      font-size: 1.25rem;
+      color: var(--text-muted);
+      max-width: 700px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+    .mission-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+      margin-bottom: 80px;
+    }
+    .mission-text h2 {
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: 24px;
+    }
+    .mission-text p {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      line-height: 1.8;
+      margin-bottom: 24px;
+    }
+    .feature-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 32px;
+    }
+    .feature-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px;
+      transition: var(--transition);
+    }
+    .feature-item:hover {
+      transform: translateY(-5px);
+      border-color: var(--indigo);
+      box-shadow: 0 10px 30px rgba(99, 102, 241, 0.1);
+    }
+    .feature-item i {
+      width: 40px;
+      height: 40px;
+      color: var(--indigo);
+      margin-bottom: 20px;
+    }
+    .feature-item h3 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    .feature-item p {
+      color: var(--text-dim);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+    @media (max-width: 768px) {
+      .about-hero h1 { font-size: 2.5rem; }
+      .mission-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <nav id="navbar" class="navbar scrolled">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <span class="logo-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="2" y="2" width="24" height="24" rx="6" fill="url(#logoGrad)" /><path d="M9 14l3 3 7-7" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><defs><linearGradient id="logoGrad" x1="2" y1="2" x2="26" y2="26"><stop stop-color="#6366f1"/><stop offset="1" stop-color="#a855f7"/></linearGradient></defs></svg></span>
+        <span class="logo-text">FreeTools</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="about-page-content">
+    <div class="container">
+      <section class="about-hero">
+        <h1>Your Toolkit for a Faster, More Private Web.</h1>
+        <p>We've built a suite of essential image and PDF tools that work entirely in your browser. No accounts, no uploads, no compromises.</p>
+      </section>
+
+      <div class="mission-grid">
+        <div class="mission-text">
+          <h2>The Problem with Modern Tools</h2>
+          <p>Most "free" online tools require you to upload your sensitive documents and private photos to their servers. This slow process wastes bandwidth and, more importantly, exposes your data to third-party storage and potential breaches.</p>
+          <p>We believed there was a better way to build for the modern web using the power of your own computer.</p>
+        </div>
+        <div class="mission-text">
+          <h2>Our Local-First Solution</h2>
+          <p>FreeTools uses cutting-edge browser technologies to process your files locally on your own CPU and GPU. Whether you're compressing a PDF or removing an image background, the data never leaves your device.</p>
+          <p>The result? Lightning-fast performance, zero data usage, and absolute privacy by design.</p>
+        </div>
+      </div>
+
+      <div class="feature-list">
+        <div class="feature-item">
+          <i data-lucide="shield"></i>
+          <h3>Privacy First</h3>
+          <p>We don't want your data. All processing happens in your browser's sandbox, ensuring your files are safe and private.</p>
+        </div>
+        <div class="feature-item">
+          <i data-lucide="zap"></i>
+          <h3>No Waiting</h3>
+          <p>Skip the upload and download bars. Experience near-instant processing speeds powered by your own hardware.</p>
+        </div>
+        <div class="feature-item">
+          <i data-lucide="heart"></i>
+          <h3>Always Free</h3>
+          <p>No subscriptions or hidden fees. We rely on subtle advertising to keep the lights on while providing professional tools.</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-bottom">
+        <p>&copy; 2026 Free Image & PDF Tools. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      if (window.lucide) lucide.createIcons();
+    });
+  </script>
+</body>
+</html>

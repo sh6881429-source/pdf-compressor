@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Merge multiple PDF files and reorder individual pages online for free. Combine and arrange PDF pages exactly how you want securely in your browser." />
+  <meta name="keywords" content="merge pdf, combine pdf, reorder pdf pages, mix pdfs, join pdf online, free pdf tools" />
+  <meta name="author" content="Free Image & PDF Tools" />
+  <title>Merge & Reorder PDF Pages Online Free | FreeTools</title>
+
+  <meta property="og:title" content="Free PDF Merger — Combine & Reorder Pages" />
+  <meta property="og:description" content="Merge multiple PDFs and drag-and-drop individual pages into any order. 100% free and secure." />
+  <meta property="og:type" content="website" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+  
+  <!-- SortableJS for Drag and Drop Reordering -->
+  <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+
+  <!-- PDF.js for Rendering Thumbnails -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script>pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';</script>
+  
+  <!-- PDF-Lib for Core PDF Merging -->
+  <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="tool-page.css" />
+  <link rel="stylesheet" href="merge-pdf.css" />
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav id="navbar" class="navbar scrolled">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo" id="nav-logo">
+        <span class="logo-icon">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+            <rect x="2" y="2" width="24" height="24" rx="6" fill="url(#logoGrad)" />
+            <path d="M9 14l3 3 7-7" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <defs><linearGradient id="logoGrad" x1="2" y1="2" x2="26" y2="26"><stop stop-color="#6366f1"/><stop offset="1" stop-color="#a855f7"/></linearGradient></defs>
+          </svg>
+        </span>
+        <span class="logo-text">FreeTools</span>
+      </a>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="index.html#image-tools" class="nav-link">Image Tools</a></li>
+        <li><a href="index.html#pdf-tools" class="nav-link active">PDF Tools</a></li>
+        <li><a href="about.html" class="nav-link">About</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+      </ul>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation menu">
+        <span class="hamburger"></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- TOOL HERO -->
+  <section class="tool-hero">
+    <div class="tool-container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="index.html">Home</a>
+        <i data-lucide="chevron-right" class="breadcrumb-sep"></i>
+        <a href="index.html#pdf-tools">PDF Tools</a>
+        <i data-lucide="chevron-right" class="breadcrumb-sep"></i>
+        <span class="breadcrumb-current">Merge PDF</span>
+      </nav>
+      <div class="tool-hero-content">
+        <div class="tool-hero-icon tool-hero-icon--blue">
+          <i data-lucide="files"></i>
+        </div>
+        <h1 class="tool-hero-title">Merge & Reorder PDF Files</h1>
+        <p class="tool-hero-desc">
+          Combine multiple PDFs into a single document. You can drag and drop entire files or mix and match individual pages in any sequence you want.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORKSPACE -->
+  <section class="tool-workspace">
+    <div class="tool-container">
+
+      <!-- INITIAL UPLOAD ZONE -->
+      <div class="upload-zone" id="initial-upload-zone">
+        <div class="upload-zone-inner">
+          <div class="upload-icon-wrap">
+            <i data-lucide="copy-plus" class="upload-icon"></i>
+          </div>
+          <h3 class="upload-title">Select PDFs to Merge</h3>
+          <p class="upload-hint">Drop multiple PDF files here or click to browse</p>
+          <label class="btn btn-primary upload-btn" for="initial-file-input">
+            <i data-lucide="folder-open" class="btn-icon"></i>
+            Choose Files
+          </label>
+          <input type="file" id="initial-file-input" accept="application/pdf" multiple hidden />
+        </div>
+      </div>
+
+      <!-- MERGE EDITOR PANEL -->
+      <div class="merge-editor" id="merge-editor" style="display: none;">
+        
+        <!-- Toolbar -->
+        <div class="editor-toolbar">
+          <div class="toolbar-left">
+            <h3 class="toolbar-title">Page Order</h3>
+            <span class="page-count-badge" id="total-pages-badge">0 Pages</span>
+          </div>
+          <div class="toolbar-right">
+            <label class="btn btn-secondary btn-sm" for="add-more-input">
+              <i data-lucide="plus" class="btn-icon"></i> Add More PDFs
+            </label>
+            <input type="file" id="add-more-input" accept="application/pdf" multiple hidden />
+            <button class="btn btn-primary btn-sm" id="merge-btn">
+              <i data-lucide="layers" class="btn-icon"></i> Merge Document
+            </button>
+          </div>
+        </div>
+
+        <p class="editor-hint">
+          <i data-lucide="info"></i>
+          Drag and drop the pages below to rearrange them. Click the trash icon to remove a page.
+        </p>
+
+        <!-- Sortable Grid for Pages -->
+        <div class="pages-grid" id="pages-grid">
+          <!-- Page thumbnails will be injected here dynamically -->
+        </div>
+
+      </div>
+
+      <!-- PROCESSING OVERLAY -->
+      <div class="processing-panel" id="processing-panel">
+        <div class="processing-spinner"></div>
+        <h3 class="processing-title" id="processing-title">Merging Document...</h3>
+        <p class="processing-desc" id="processing-desc">Generating high-quality PDF. Please wait.</p>
+        <div class="processing-progress">
+          <div class="progress-bar" id="progress-bar"></div>
+        </div>
+      </div>
+
+      <!-- RESULT PANEL -->
+      <div class="tool-panel" id="tool-panel">
+        <div class="result-card">
+          <div class="result-header">
+            <div class="result-icon result-icon--blue"><i data-lucide="check-circle-2"></i></div>
+            <div class="result-text">
+              <h3>PDF Merged Successfully!</h3>
+              <p class="file-name">Your new document is ready to download.</p>
+            </div>
+          </div>
+          
+          <div class="action-buttons">
+            <button class="btn btn-secondary" id="reset-tool-btn">
+              <i data-lucide="rotate-ccw" class="btn-icon"></i> Start Over
+            </button>
+            <button class="btn btn-download" id="download-btn">
+              <i data-lucide="download" class="btn-icon"></i> Download Merged PDF
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SEO CONTENT -->
+  <section class="seo-section">
+    <div class="tool-container">
+      <div class="seo-content">
+        <h2>Free PDF Merger — Mix & Arrange Pages Easily</h2>
+        <p>
+          Managing multiple PDF documents can be chaotic. Whether you need to combine reports, mix invoice pages, or compile a portfolio, our <strong>free online PDF merger</strong> gives you ultimate control. Not only can you merge entire PDF files together, but our advanced workspace allows you to extract and rearrange individual pages exactly as you need them.
+        </p>
+        <p>
+          Our drag-and-drop interface generates a visual thumbnail of every single page you upload. You can visually arrange the sequence of pages across different documents, delete unwanted pages, and click merge to create a perfectly customized final PDF.
+        </p>
+        <p>
+          <strong>Total Privacy Guaranteed:</strong> Most PDF combining tools require you to upload your confidential files to a remote server. We do things differently. Using modern WebAssembly technology, the entire merging process happens <strong>locally in your web browser</strong>. Your files are never uploaded, stored, or seen by anyone else.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq-section">
+    <div class="tool-container">
+      <h2 class="faq-heading">Frequently Asked Questions</h2>
+      <div class="faq-list" id="faq-list">
+        <div class="faq-item" id="faq-1">
+          <button class="faq-question" aria-expanded="false">
+            <span>Can I mix pages from different PDFs?</span>
+            <i data-lucide="chevron-down" class="faq-icon"></i>
+          </button>
+          <div class="faq-answer"><p>Yes! This tool is designed specifically for that. When you upload multiple PDFs, all their pages are displayed as individual thumbnails. You can drag and drop a page from Document A right into the middle of Document B.</p></div>
+        </div>
+        <div class="faq-item" id="faq-2">
+          <button class="faq-question" aria-expanded="false">
+            <span>Can I delete specific pages before merging?</span>
+            <i data-lucide="chevron-down" class="faq-icon"></i>
+          </button>
+          <div class="faq-answer"><p>Absolutely. Hover over any page thumbnail and click the trash icon to remove it. It won't be included in the final merged document.</p></div>
+        </div>
+        <div class="faq-item" id="faq-3">
+          <button class="faq-question" aria-expanded="false">
+            <span>Is there a limit to how many files I can merge?</span>
+            <i data-lucide="chevron-down" class="faq-icon"></i>
+          </button>
+          <div class="faq-answer"><p>There are no hard limits, but since processing happens in your browser's memory, merging hundreds of high-resolution pages might slow down your computer. For optimal performance, we recommend staying under 200 pages at a time.</p></div>
+        </div>
+        <div class="faq-item" id="faq-4">
+          <button class="faq-question" aria-expanded="false">
+            <span>Are my merged documents secure?</span>
+            <i data-lucide="chevron-down" class="faq-icon"></i>
+          </button>
+          <div class="faq-answer"><p>Yes, 100% secure. All processing is done locally on your device using JavaScript. Your files are never sent over the internet or stored on our servers.</p></div>
+        </div>
+        <div class="faq-item" id="faq-5">
+          <button class="faq-question" aria-expanded="false">
+            <span>Will the merged PDF lose original resolution?</span>
+            <i data-lucide="chevron-down" class="faq-icon"></i>
+          </button>
+          <div class="faq-answer"><p>No, our tool preserves the original resolution, text vectors, and links within your PDF pages. We combine the document metadata without re-compressing your content.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RELATED TOOLS -->
+  <section class="related-section">
+    <div class="tool-container">
+      <h2 class="related-heading">You Might Also Like</h2>
+      <div class="related-grid">
+        <a href="compress-pdf.html" class="related-card" id="related-compress-pdf">
+          <div class="related-icon related-icon--amber"><i data-lucide="archive"></i></div>
+          <div><h4>Compress PDF</h4><p>Reduce PDF file size securely</p></div>
+          <i data-lucide="arrow-right" class="related-arrow"></i>
+        </a>
+        <a href="pdf-security.html" class="related-card" id="related-security">
+          <div class="related-icon related-icon--blue"><i data-lucide="shield-check"></i></div>
+          <div><h4>PDF Security</h4><p>Lock or unlock your documents</p></div>
+          <i data-lucide="arrow-right" class="related-arrow"></i>
+        </a>
+        <a href="bg-remover.html" class="related-card" id="related-bgremove">
+          <div class="related-icon related-icon--rose"><i data-lucide="eraser"></i></div>
+          <div><h4>Background Remover</h4><p>AI-powered transparent backgrounds</p></div>
+          <i data-lucide="arrow-right" class="related-arrow"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="index.html" class="nav-logo">
+            <span class="logo-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="2" y="2" width="24" height="24" rx="6" fill="url(#logoGrad2)" /><path d="M9 14l3 3 7-7" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><defs><linearGradient id="logoGrad2" x1="2" y1="2" x2="26" y2="26"><stop stop-color="#6366f1"/><stop offset="1" stop-color="#a855f7"/></linearGradient></defs></svg></span>
+            <span class="logo-text">FreeTools</span>
+          </a>
+          <p class="footer-tagline">Powerful image & PDF tools, free forever.</p>
+        </div>
+        <div class="footer-links-group">
+          <div class="footer-col"><h4>Image Tools</h4><ul><li><a href="resize-image.html">Resize Image</a></li><li><a href="image-enhancer.html">Image Enhancer</a></li><li><a href="tool-template.html">Image Compressor</a></li><li><a href="bg-remover.html">Background Remover</a></li></ul></div>
+          <div class="footer-col"><h4>PDF Tools</h4><ul><li><a href="compress-pdf.html">Compress PDF</a></li><li><a href="merge-pdf.html">Merge PDF</a></li><li><a href="pdf-security.html">PDF Security</a></li></ul></div>
+          <div class="footer-col"><h4>Company</h4><ul><li><a href="about.html">About Us</a></li><li><a href="contact.html">Contact Us</a></li><li><a href="privacy-policy.html">Privacy Policy</a></li><li><a href="terms-conditions.html">Terms & Conditions</a></li></ul></div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Free Image & PDF Tools. All rights reserved.</p>
+        <div class="footer-socials">
+          <a href="#" aria-label="Twitter"><i data-lucide="twitter"></i></a>
+          <a href="#" aria-label="GitHub"><i data-lucide="github"></i></a>
+          <a href="#" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <button class="scroll-top" id="scroll-top" aria-label="Scroll to top">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"/></svg>
+  </button>
+
+  <script src="merge-pdf.js"></script>
+</body>
+</html>

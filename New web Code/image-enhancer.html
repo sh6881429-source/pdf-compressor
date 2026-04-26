@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Enhance image quality online for free. Improve sharpness, adjust brightness, contrast, and saturation. Auto-enhance photos instantly in your browser." />
+  <meta name="keywords" content="image enhancer, improve photo quality, sharpen image, auto enhance photo, online photo editor, enhance image resolution" />
+  <meta name="author" content="Free Image & PDF Tools" />
+  <title>Image Enhancer Online Free — Improve Photo Quality | FreeTools</title>
+
+  <meta property="og:title" content="Free Image Enhancer — Make Your Photos Look Better" />
+  <meta property="og:description" content="Improve image quality, adjust lighting, and sharpen details. 100% free, private, and fast browser-based processing." />
+  <meta property="og:type" content="website" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="tool-page.css" />
+  <link rel="stylesheet" href="image-enhancer.css" />
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav id="navbar" class="navbar scrolled">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo" id="nav-logo">
+        <span class="logo-icon">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+            <rect x="2" y="2" width="24" height="24" rx="6" fill="url(#logoGrad)" />
+            <path d="M9 14l3 3 7-7" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <defs><linearGradient id="logoGrad" x1="2" y1="2" x2="26" y2="26"><stop stop-color="#6366f1"/><stop offset="1" stop-color="#a855f7"/></linearGradient></defs>
+          </svg>
+        </span>
+        <span class="logo-text">FreeTools</span>
+      </a>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="index.html#image-tools" class="nav-link active">Image Tools</a></li>
+        <li><a href="index.html#pdf-tools" class="nav-link">PDF Tools</a></li>
+        <li><a href="about.html" class="nav-link">About</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+      </ul>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation menu">
+        <span class="hamburger"></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- TOOL HERO -->
+  <section class="tool-hero">
+    <div class="tool-container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="index.html">Home</a>
+        <i data-lucide="chevron-right" class="breadcrumb-sep"></i>
+        <a href="index.html#image-tools">Image Tools</a>
+        <i data-lucide="chevron-right" class="breadcrumb-sep"></i>
+        <span class="breadcrumb-current">Image Enhancer</span>
+      </nav>
+      <div class="tool-hero-content">
+        <div class="tool-hero-icon tool-hero-icon--purple">
+          <i data-lucide="sparkles"></i>
+        </div>
+        <h1 class="tool-hero-title">Image Enhancer Online Free</h1>
+        <p class="tool-hero-desc">
+          Improve image quality, fix lighting, and sharpen details. Use auto-enhance for a one-click fix, or fine-tune settings manually.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- UPLOAD ZONE -->
+  <section class="tool-workspace">
+    <div class="tool-container">
+
+      <div class="upload-zone" id="upload-zone">
+        <!-- Preview shown when file is selected -->
+        <div class="upload-preview" id="upload-preview">
+          <img id="upload-preview-img" src="" alt="Preview" />
+          <div class="upload-preview-info">
+            <span class="upload-preview-name" id="upload-preview-name"></span>
+            <span class="upload-preview-size" id="upload-preview-size"></span>
+          </div>
+          <button class="upload-remove-btn" id="upload-remove-btn" title="Remove image">
+            <i data-lucide="x"></i>
+          </button>
+        </div>
+        <!-- Default state shown before file is selected -->
+        <div class="upload-zone-inner">
+          <div class="upload-icon-wrap">
+            <i data-lucide="upload-cloud" class="upload-icon"></i>
+          </div>
+          <h3 class="upload-title">Drop your image here</h3>
+          <p class="upload-hint">or click to browse — JPG, PNG, WebP up to 200 MB</p>
+          <label class="btn btn-primary upload-btn" for="file-input">
+            <i data-lucide="folder-open" class="btn-icon"></i>
+            Choose File
+          </label>
+          <input type="file" id="file-input" accept="image/jpeg,image/png,image/webp" hidden />
+        </div>
+      </div>
+
+      <!-- TOOL PANEL -->
+      <div class="tool-panel" id="tool-panel">
+
+        <div class="controls-layout">
+          <!-- Left: Adjustments -->
+          <div class="controls-sidebar">
+            <div class="controls-bar">
+              <div class="controls-header">
+                <h3 class="controls-title">
+                  <i data-lucide="sliders-horizontal"></i>
+                  Adjustments
+                </h3>
+                <button class="btn-auto-enhance" id="auto-enhance-btn">
+                  <i data-lucide="wand-2"></i> Auto Fix
+                </button>
+              </div>
+
+              <div class="sliders-list">
+                <!-- Brightness -->
+                <div class="control-group">
+                  <div class="slider-header">
+                    <label for="brightness-slider">Brightness</label>
+                    <span class="range-value" id="brightness-val">0</span>
+                  </div>
+                  <div class="range-wrap">
+                    <input type="range" id="brightness-slider" min="-100" max="100" value="0" />
+                  </div>
+                </div>
+
+                <!-- Contrast -->
+                <div class="control-group">
+                  <div class="slider-header">
+                    <label for="contrast-slider">Contrast</label>
+                    <span class="range-value" id="contrast-val">0</span>
+                  </div>
+                  <div class="range-wrap">
+                    <input type="range" id="contrast-slider" min="-100" max="100" value="0" />
+                  </div>
+                </div>
+
+                <!-- Saturation -->
+                <div class="control-group">
+                  <div class="slider-header">
+                    <label for="saturation-slider">Saturation</label>
+                    <span class="range-value" id="saturation-val">0</span>
+                  </div>
+                  <div class="range-wrap">
+                    <input type="range" id="saturation-slider" min="-100" max="100" value="0" />
+                  </div>
+                </div>
+                
+                <!-- Sharpness -->
+                <div class="control-group">
+                  <div class="slider-header">
+                    <label for="sharpness-slider">Sharpness</label>
+                    <span class="range-value" id="sharpness-val">0</span>
+                  </div>
+                  <div class="range-wrap">
+                    <input type="range" id="sharpness-slider" min="0" max="100" value="0" />
+                  </div>
+                </div>
+              </div>
+
+              <div class="action-buttons">
+                <button class="btn btn-secondary btn-full" id="reset-sliders-btn">
+                  <i data-lucide="rotate-ccw" class="btn-icon"></i> Reset Sliders
+                </button>
+                <button class="btn btn-primary btn-full" id="apply-btn">
+                  <i data-lucide="check-circle" class="btn-icon"></i> Apply & Enhance
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Preview -->
+          <div class="preview-area">
+            <div class="preview-section" id="preview-section">
+              <h3 class="preview-title">
+                <i data-lucide="eye"></i>
+                Live Preview
+              </h3>
+              <div class="ba-container" id="ba-container">
+                <div class="ba-wrapper">
+                  <div class="ba-image ba-before"><img id="before-img" src="" alt="Original image" /><span class="ba-label">Original</span></div>
+                  <!-- Use a canvas for live preview to make it fast -->
+                  <div class="ba-image ba-after" id="ba-after"><canvas id="preview-canvas"></canvas><span class="ba-label ba-label--after">Enhanced</span></div>
+                  <div class="ba-slider" id="ba-slider"><div class="ba-handle"><i data-lucide="grip-vertical"></i></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Download -->
+        <div class="download-section" id="download-section" style="display:none">
+          <button class="btn btn-download" id="download-btn">
+            <i data-lucide="download" class="btn-icon"></i>
+            Download Enhanced Image
+          </button>
+          <button class="btn btn-secondary" id="reset-tool-btn">
+            <i data-lucide="image-plus" class="btn-icon"></i>
+            Enhance Another
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SEO CONTENT -->
+  <section class="seo-section">
+    <div class="tool-container">
+      <div class="seo-content">
+        <h2>Free Online Image Enhancer — Improve Photo Quality Instantly</h2>
+        <p>
+          Our <strong>free online image enhancer</strong> helps you bring your dull, dark, or blurry photos back to life. Whether you need to fix lighting, boost colors, or sharpen details, our browser-based tool gives you professional-level control without the complexity of heavy editing software.
+        </p>
+        <p>
+          Use the one-click <strong>Auto Fix</strong> button to let our algorithms automatically analyze and correct brightness, contrast, and saturation. Or, take full control using the manual sliders to fine-tune every aspect of your image. The real-time <strong>before and after preview slider</strong> lets you compare your enhancements instantly.
+        </p>
+        <p>
+          Need to fix a slightly out-of-focus shot? Use the <strong>Sharpness slider</strong> to apply advanced unsharp masking techniques that bring out edge details and make your subjects pop.
+        </p>
+        <p>
+          Best of all, your privacy is guaranteed. All image processing happens <strong>locally in your browser</strong> using HTML5 Canvas technology. Your files are never uploaded to our servers, meaning your personal photos remain completely secure and private.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq-section">
+    <div class="tool-container">
+      <h2 class="faq-heading">Frequently Asked Questions</h2>
+      <div class="faq-list" id="faq-list">
+        <div class="faq-item" id="faq-1">
+          <button class="faq-question" aria-expanded="false">
+            <span>How does the Auto Fix feature work?</span>
+            <i data-lucide="chevron-down" class="faq-icon"></i>
+          </button>
+          <div class="faq-answer"><p>The Auto Fix button applies a balanced preset that gently boosts contrast, enhances saturation for more vibrant colors, and slightly increases brightness and sharpness. It’s a great starting point for flat or underexposed photos.</p></div>
+        </div>
+        <div class="faq-item" id="faq-2">
+          <button class="faq-question" aria-expanded="false">
+            <span>Can this fix a very blurry photo?</span>
+            <i data-lucide="chevron-down" class="faq-icon"></i>
+          </button>
+          <div class="faq-answer"><p>Our sharpness tool uses a convolution matrix to enhance edge contrast, which works great for slightly soft or out-of-focus images. However, it cannot completely restore a heavily motion-blurred or severely out-of-focus photo.</p></div>
+        </div>
+        <div class="faq-item" id="faq-3">
+          <button class="faq-question" aria-expanded="false">
+            <span>Is my image uploaded to your servers?</span>
+            <i data-lucide="chevron-down" class="faq-icon"></i>
+          </button>
+          <div class="faq-answer"><p>No, absolutely not. All image enhancements are processed locally on your device within your web browser. We do not store or see your photos, ensuring 100% privacy and security.</p></div>
+        </div>
+        <div class="faq-item" id="faq-4">
+          <button class="faq-question" aria-expanded="false">
+            <span>Will the downloaded image lose quality?</span>
+            <i data-lucide="chevron-down" class="faq-icon"></i>
+          </button>
+          <div class="faq-answer"><p>No. We export your enhanced image at the highest possible quality matching your original file dimensions. If you upload a JPEG, it will be saved as a high-quality JPEG.</p></div>
+        </div>
+        <div class="faq-item" id="faq-5">
+          <button class="faq-question" aria-expanded="false">
+            <span>Is there a limit on file size or number of photos?</span>
+            <i data-lucide="chevron-down" class="faq-icon"></i>
+          </button>
+          <div class="faq-answer"><p>No, there are no strict limits! You can enhance as many photos as you want. However, very large images (over 20MB) may take more time to process depending on your computer's performance.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RELATED TOOLS -->
+  <section class="related-section">
+    <div class="tool-container">
+      <h2 class="related-heading">You Might Also Like</h2>
+      <div class="related-grid">
+        <a href="resize-image.html" class="related-card" id="related-resize">
+          <div class="related-icon related-icon--blue"><i data-lucide="maximize-2"></i></div>
+          <div><h4>Resize Image</h4><p>Change dimensions and aspect ratios</p></div>
+          <i data-lucide="arrow-right" class="related-arrow"></i>
+        </a>
+        <a href="bg-remover.html" class="related-card" id="related-bgremove">
+          <div class="related-icon related-icon--rose"><i data-lucide="eraser"></i></div>
+          <div><h4>Background Remover</h4><p>Remove backgrounds in one click with AI</p></div>
+          <i data-lucide="arrow-right" class="related-arrow"></i>
+        </a>
+        <a href="tool-template.html" class="related-card" id="related-compress-img">
+          <div class="related-icon related-icon--amber"><i data-lucide="image-down"></i></div>
+          <div><h4>Image Compressor</h4><p>Reduce file size without quality loss</p></div>
+          <i data-lucide="arrow-right" class="related-arrow"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="index.html" class="nav-logo">
+            <span class="logo-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="2" y="2" width="24" height="24" rx="6" fill="url(#logoGrad2)" /><path d="M9 14l3 3 7-7" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><defs><linearGradient id="logoGrad2" x1="2" y1="2" x2="26" y2="26"><stop stop-color="#6366f1"/><stop offset="1" stop-color="#a855f7"/></linearGradient></defs></svg></span>
+            <span class="logo-text">FreeTools</span>
+          </a>
+          <p class="footer-tagline">Powerful image & PDF tools, free forever.</p>
+        </div>
+        <div class="footer-links-group">
+          <div class="footer-col"><h4>Image Tools</h4><ul><li><a href="resize-image.html">Resize Image</a></li><li><a href="image-enhancer.html">Image Enhancer</a></li><li><a href="tool-template.html">Image Compressor</a></li><li><a href="bg-remover.html">Background Remover</a></li></ul></div>
+          <div class="footer-col"><h4>PDF Tools</h4><ul><li><a href="compress-pdf.html">Compress PDF</a></li><li><a href="merge-pdf.html">Merge PDF</a></li><li><a href="pdf-security.html">PDF Security</a></li></ul></div>
+          <div class="footer-col"><h4>Company</h4><ul><li><a href="about.html">About Us</a></li><li><a href="contact.html">Contact Us</a></li><li><a href="privacy-policy.html">Privacy Policy</a></li><li><a href="terms-conditions.html">Terms & Conditions</a></li></ul></div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Free Image & PDF Tools. All rights reserved.</p>
+        <div class="footer-socials">
+          <a href="#" aria-label="Twitter"><i data-lucide="twitter"></i></a>
+          <a href="#" aria-label="GitHub"><i data-lucide="github"></i></a>
+          <a href="#" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <button class="scroll-top" id="scroll-top" aria-label="Scroll to top">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"/></svg>
+  </button>
+
+  <script src="image-enhancer.js"></script>
+</body>
+</html>

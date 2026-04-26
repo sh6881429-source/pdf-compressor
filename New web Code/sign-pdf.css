@@ -1,0 +1,387 @@
+/* ═══════════════════ SIGN PDF CSS ═══════════════════ */
+
+/* Hero icon override */
+.tool-hero-icon--emerald {
+  background: rgba(16, 185, 129, .12);
+  color: var(--emerald);
+}
+
+/* ── Editor Workspace ── */
+/* ── Editor Workspace ── */
+#app {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  margin-top: -16px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── App Mode (Full Page takeover) ── */
+body.app-mode {
+  margin: 0;
+  height: 100vh;
+  overflow: hidden !important;
+}
+body.app-mode #navbar,
+body.app-mode .tool-hero,
+body.app-mode .seo-section,
+body.app-mode .faq-section,
+body.app-mode .related-section,
+body.app-mode .footer,
+body.app-mode .breadcrumb {
+  display: none !important;
+}
+body.app-mode .tool-workspace {
+  padding: 0;
+}
+body.app-mode .tool-container {
+  max-width: 100%;
+  padding: 0;
+}
+body.app-mode #app {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  border-radius: 0;
+  border: none;
+  z-index: 9999;
+}
+
+/* ── Fullscreen Mode (Browser API) ── */
+#app:fullscreen {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  border-radius: 0;
+  background: var(--bg);
+  overflow: hidden; /* Prevent body scroll while in FS */
+}
+#app:fullscreen #pdfContainer {
+  height: calc(100vh - 110px);
+  max-height: none;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+#app:fullscreen .editor-toolbar {
+  border-radius: 0;
+}
+
+.editor-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.toolbar-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.toolbar-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  font-size: .95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+}
+.toolbar-btn i {
+  width: 18px;
+  height: 18px;
+  color: var(--text-dim);
+}
+.toolbar-btn:hover {
+  background: rgba(16, 185, 129, .1);
+  border-color: var(--emerald);
+  color: var(--emerald);
+}
+.toolbar-btn:hover i {
+  color: var(--emerald);
+}
+#zoom-level {
+  font-size: .9rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  min-width: 45px;
+  text-align: center;
+}
+
+.editor-hint {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: .9rem;
+  color: var(--text-muted);
+  background: rgba(16, 185, 129, .05);
+  border-bottom: 1px solid var(--border);
+  padding: 12px 24px;
+}
+.editor-hint i {
+  color: var(--emerald);
+  width: 18px;
+  height: 18px;
+}
+
+/* ── PDF Viewer Container ── */
+/* ── PDF Viewer Container ── */
+#pdfContainer {
+  padding: 32px 16px;
+  background: #111;
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 80vh; /* Responsive limit when not in app-mode */
+  display: flex;
+  justify-content: center;
+  -webkit-overflow-scrolling: touch; /* Better mobile scroll */
+  flex: 1;
+}
+body.app-mode #pdfContainer {
+  max-height: none;
+  height: 100%;
+}
+.pdf-pages-wrapper {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  transform-origin: top center;
+  transition: transform 0.2s ease;
+}
+
+/* ── Individual Page ── */
+.pdf-page {
+  position: relative;
+  background: #fff;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  overflow: hidden; /* Elements outside page get clipped */
+}
+.pdf-page canvas {
+  display: block;
+  margin: 0 auto;
+  /* Visual size is controlled by inline styles, actual resolution is higher via JS */
+}
+
+/* ── Draggable Signature ── */
+.signature-element {
+  position: absolute;
+  cursor: grab;
+  user-select: none;
+  border: 1px dashed transparent;
+  transition: border 0.1s ease;
+}
+.signature-element:hover {
+  border: 1px dashed rgba(16, 185, 129, 0.5);
+}
+.signature-element:active {
+  cursor: grabbing;
+}
+.signature-element.selected {
+  border: 2px dashed var(--emerald);
+  z-index: 100;
+}
+.signature-element.selected .remove-element-btn,
+.signature-element.selected .resize-handle {
+  display: flex;
+}
+.signature-element img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* Let container handle events */
+}
+
+/* Remove button */
+.remove-element-btn {
+  position: absolute;
+  top: -12px;
+  right: -12px;
+  width: 24px;
+  height: 24px;
+  background: var(--rose);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 101;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+.remove-element-btn i { width: 14px; height: 14px; }
+
+/* Resize handle */
+.resize-handle {
+  position: absolute;
+  bottom: -6px;
+  right: -6px;
+  width: 16px;
+  height: 16px;
+  background: var(--emerald);
+  border: 2px solid #fff;
+  border-radius: 50%;
+  display: none;
+  cursor: nwse-resize;
+  z-index: 101;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+
+/* ── Processing Panel ── */
+.processing-panel {
+  display: none;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 64px 24px;
+  text-align: center;
+  animation: fadeInUp .5s ease both;
+}
+.processing-panel.active {
+  display: block;
+}
+.processing-spinner {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  border: 4px solid rgba(16, 185, 129, .2);
+  border-top-color: var(--emerald);
+  animation: spinIcon 1s linear infinite;
+  margin: 0 auto 24px;
+}
+
+/* ── Signature Modal ── */
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0,0,0,0.7);
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+.modal-overlay.active {
+  display: flex;
+  opacity: 1;
+}
+.modal-content {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  width: 90%;
+  max-width: 550px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  animation: slideUp 0.3s ease;
+}
+@keyframes slideUp {
+  from { transform: translateY(20px); }
+  to { transform: translateY(0); }
+}
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--border);
+}
+.modal-header h3 { margin: 0; font-size: 1.2rem; }
+.modal-close {
+  background: none; border: none; color: var(--text-dim); cursor: pointer;
+}
+.modal-close:hover { color: var(--text); }
+.modal-body {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.sign-tabs {
+  display: flex;
+  background: var(--bg);
+  border-radius: var(--radius-sm);
+  padding: 4px;
+  margin-bottom: 16px;
+}
+.sign-tab {
+  flex: 1;
+  background: none;
+  border: none;
+  padding: 10px;
+  font-weight: 600;
+  color: var(--text-muted);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+.sign-tab.active {
+  background: var(--bg-card);
+  color: var(--emerald);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.sign-view {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+#signature-pad {
+  background: #fff;
+  border: 2px dashed var(--border);
+  border-radius: var(--radius-sm);
+  cursor: crosshair;
+  touch-action: none;
+  width: 100%;
+}
+.upload-sig-box {
+  width: 100%;
+  padding: 48px 24px;
+  border: 2px dashed var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg);
+  text-align: center;
+  cursor: pointer;
+  transition: var(--transition);
+}
+.upload-sig-box:hover {
+  border-color: var(--emerald);
+  background: rgba(16, 185, 129, .05);
+}
+.upload-sig-box i {
+  width: 32px; height: 32px; color: var(--text-muted); margin-bottom: 12px;
+}
+
+.modal-footer {
+  padding: 16px 24px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+/* ═══════════════════ MOBILE ═══════════════════ */
+@media (max-width: 768px) {
+  .editor-toolbar {
+    justify-content: center;
+  }
+}

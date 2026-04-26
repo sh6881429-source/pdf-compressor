@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Remove image backgrounds automatically for free. Our AI-powered tool instantly creates transparent PNGs directly in your browser. No sign-up required." />
+  <meta name="keywords" content="remove background, transparent background, background eraser, remove bg online, make background transparent, png maker" />
+  <meta name="author" content="Free Image & PDF Tools" />
+  <title>Remove Background from Image Online Free | FreeTools</title>
+
+  <meta property="og:title" content="Free AI Background Remover — Instant Transparent PNGs" />
+  <meta property="og:description" content="Remove backgrounds from photos automatically. 100% free, private, browser-based AI tool." />
+  <meta property="og:type" content="website" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+  
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="tool-page.css" />
+  <link rel="stylesheet" href="bg-remover.css" />
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav id="navbar" class="navbar scrolled">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo" id="nav-logo">
+        <span class="logo-icon">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+            <rect x="2" y="2" width="24" height="24" rx="6" fill="url(#logoGrad)" />
+            <path d="M9 14l3 3 7-7" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <defs><linearGradient id="logoGrad" x1="2" y1="2" x2="26" y2="26"><stop stop-color="#6366f1"/><stop offset="1" stop-color="#a855f7"/></linearGradient></defs>
+          </svg>
+        </span>
+        <span class="logo-text">FreeTools</span>
+      </a>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="index.html#image-tools" class="nav-link active">Image Tools</a></li>
+        <li><a href="index.html#pdf-tools" class="nav-link">PDF Tools</a></li>
+        <li><a href="about.html" class="nav-link">About</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+      </ul>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation menu">
+        <span class="hamburger"></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- TOOL HERO -->
+  <section class="tool-hero">
+    <div class="tool-container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="index.html">Home</a>
+        <i data-lucide="chevron-right" class="breadcrumb-sep"></i>
+        <a href="index.html#image-tools">Image Tools</a>
+        <i data-lucide="chevron-right" class="breadcrumb-sep"></i>
+        <span class="breadcrumb-current">Background Remover</span>
+      </nav>
+      <div class="tool-hero-content">
+        <div class="tool-hero-icon tool-hero-icon--rose">
+          <i data-lucide="eraser"></i>
+        </div>
+        <h1 class="tool-hero-title">Remove Background from Image</h1>
+        <p class="tool-hero-desc">
+          Automatically erase backgrounds from your photos in seconds using on-device AI. Create perfect transparent PNGs instantly.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- UPLOAD ZONE -->
+  <section class="tool-workspace">
+    <div class="tool-container">
+
+      <div class="upload-zone" id="upload-zone">
+        <!-- Preview shown when file is selected -->
+        <div class="upload-preview" id="upload-preview">
+          <img id="upload-preview-img" src="" alt="Preview" />
+          <div class="upload-preview-info">
+            <span class="upload-preview-name" id="upload-preview-name"></span>
+            <span class="upload-preview-size" id="upload-preview-size"></span>
+          </div>
+          <button class="upload-remove-btn" id="upload-remove-btn" title="Remove image">
+            <i data-lucide="x"></i>
+          </button>
+        </div>
+        <!-- Default state shown before file is selected -->
+        <div class="upload-zone-inner">
+          <div class="upload-icon-wrap">
+            <i data-lucide="upload-cloud" class="upload-icon"></i>
+          </div>
+          <h3 class="upload-title">Drop your image here</h3>
+          <p class="upload-hint">or click to browse — JPG, PNG, WebP up to 200 MB</p>
+          <label class="btn btn-primary upload-btn" for="file-input">
+            <i data-lucide="folder-open" class="btn-icon"></i>
+            Choose File
+          </label>
+          <input type="file" id="file-input" accept="image/jpeg,image/png,image/webp" hidden />
+        </div>
+      </div>
+
+      <!-- PROCESSING OVERLAY -->
+      <div class="processing-panel" id="processing-panel">
+        <div class="processing-spinner"></div>
+        <h3 class="processing-title">AI is working its magic...</h3>
+        <p class="processing-desc" id="processing-desc">Analyzing image and removing background. This runs entirely in your browser.</p>
+        <div class="processing-progress">
+          <div class="progress-bar" id="progress-bar"></div>
+        </div>
+      </div>
+
+      <!-- TOOL PANEL -->
+      <div class="tool-panel" id="tool-panel">
+        
+        <div class="controls-bar">
+          <div class="result-header">
+            <h3 class="controls-title">
+              <i data-lucide="check-circle-2"></i>
+              Background Removed Successfully
+            </h3>
+            <button class="btn btn-secondary btn-sm" id="reset-tool-btn">
+              <i data-lucide="image-plus" class="btn-icon"></i> Process Another
+            </button>
+          </div>
+        </div>
+
+        <div class="preview-section" id="preview-section">
+          <h3 class="preview-title">
+            <i data-lucide="eye"></i>
+            Before & After Preview
+          </h3>
+          <div class="ba-container checkerboard" id="ba-container">
+            <div class="ba-wrapper">
+              <!-- Background is checkerboard to show transparency -->
+              <div class="ba-image ba-before"><img id="before-img" src="" alt="Original image" /><span class="ba-label">Original</span></div>
+              <div class="ba-image ba-after" id="ba-after"><img id="after-img" src="" alt="Background removed" /><span class="ba-label ba-label--after">Removed</span></div>
+              <div class="ba-slider" id="ba-slider"><div class="ba-handle"><i data-lucide="grip-vertical"></i></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Download -->
+        <div class="download-section">
+          <button class="btn btn-download" id="download-btn">
+            <i data-lucide="download" class="btn-icon"></i>
+            Download Transparent PNG
+          </button>
+          <p class="download-note">Image is saved in PNG format to preserve transparency.</p>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SEO CONTENT -->
+  <section class="seo-section">
+    <div class="tool-container">
+      <div class="seo-content">
+        <h2>Free AI Background Remover — Instant Transparent PNGs</h2>
+        <p>
+          Need to cut out a subject from a photo? Our <strong>free online background remover</strong> uses state-of-the-art Artificial Intelligence to automatically detect the main subject of your image and cleanly erase the background. It takes just seconds, and the result is a perfect transparent PNG ready for your designs.
+        </p>
+        <p>
+          Unlike traditional editing software that requires tedious manual tracing with lasso tools or magic wands, our AI handles complex edges like hair, fur, and clothing with incredible precision. It's the perfect tool for creating <strong>e-commerce product photos, YouTube thumbnails, profile pictures, and marketing materials</strong>.
+        </p>
+        <p>
+          What makes our tool truly unique is that the AI model runs <strong>entirely in your web browser</strong>. When you upload a photo, it never leaves your device. This guarantees complete privacy for your sensitive or personal images and allows for incredibly fast processing without waiting in server queues.
+        </p>
+        <p>
+          The tool is 100% free to use with no hidden costs, no mandatory sign-ups, and absolutely <strong>no watermarks</strong> on your final downloads. Start removing backgrounds instantly and take your creative projects to the next level.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq-section">
+    <div class="tool-container">
+      <h2 class="faq-heading">Frequently Asked Questions</h2>
+      <div class="faq-list" id="faq-list">
+        <div class="faq-item" id="faq-1">
+          <button class="faq-question" aria-expanded="false">
+            <span>How does the AI background removal work?</span>
+            <i data-lucide="chevron-down" class="faq-icon"></i>
+          </button>
+          <div class="faq-answer"><p>Our tool uses an advanced Machine Learning model that runs directly in your browser using WebAssembly. The AI is trained on millions of images to accurately distinguish the foreground subject (like people, products, or animals) from the background, cleanly masking out the background pixels.</p></div>
+        </div>
+        <div class="faq-item" id="faq-2">
+          <button class="faq-question" aria-expanded="false">
+            <span>Is my photo uploaded to your server?</span>
+            <i data-lucide="chevron-down" class="faq-icon"></i>
+          </button>
+          <div class="faq-answer"><p>No! Unlike most other background removal tools, our AI runs locally on your device. Your photos are never uploaded, stored, or viewed by our servers, ensuring 100% privacy.</p></div>
+        </div>
+        <div class="faq-item" id="faq-3">
+          <button class="faq-question" aria-expanded="false">
+            <span>Will the tool put a watermark on my image?</span>
+            <i data-lucide="chevron-down" class="faq-icon"></i>
+          </button>
+          <div class="faq-answer"><p>Absolutely not. The transparent PNG you download is entirely watermark-free and retains the highest possible resolution from your original upload.</p></div>
+        </div>
+        <div class="faq-item" id="faq-4">
+          <button class="faq-question" aria-expanded="false">
+            <span>Why is the downloaded file a PNG?</span>
+            <i data-lucide="chevron-down" class="faq-icon"></i>
+          </button>
+          <div class="faq-answer"><p>JPEG format does not support transparency. To maintain the invisible background created by our tool, the image must be saved as a PNG, which fully supports alpha-channel transparency.</p></div>
+        </div>
+        <div class="faq-item" id="faq-5">
+          <button class="faq-question" aria-expanded="false">
+            <span>Why does it take a few seconds on the first try?</span>
+            <i data-lucide="chevron-down" class="faq-icon"></i>
+          </button>
+          <div class="faq-answer"><p>The very first time you use the tool, your browser needs to download the AI model in the background. Once downloaded, subsequent images will process much faster because the AI is already loaded into your browser's memory.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RELATED TOOLS -->
+  <section class="related-section">
+    <div class="tool-container">
+      <h2 class="related-heading">You Might Also Like</h2>
+      <div class="related-grid">
+        <a href="resize-image.html" class="related-card" id="related-resize">
+          <div class="related-icon related-icon--blue"><i data-lucide="maximize-2"></i></div>
+          <div><h4>Resize Image</h4><p>Change dimensions and aspect ratios</p></div>
+          <i data-lucide="arrow-right" class="related-arrow"></i>
+        </a>
+        <a href="image-enhancer.html" class="related-card" id="related-enhance">
+          <div class="related-icon related-icon--purple"><i data-lucide="sparkles"></i></div>
+          <div><h4>Image Enhancer</h4><p>Improve quality and sharpness with AI</p></div>
+          <i data-lucide="arrow-right" class="related-arrow"></i>
+        </a>
+        <a href="tool-template.html" class="related-card" id="related-compress-img">
+          <div class="related-icon related-icon--amber"><i data-lucide="image-down"></i></div>
+          <div><h4>Image Compressor</h4><p>Reduce file size without quality loss</p></div>
+          <i data-lucide="arrow-right" class="related-arrow"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="index.html" class="nav-logo">
+            <span class="logo-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="2" y="2" width="24" height="24" rx="6" fill="url(#logoGrad2)" /><path d="M9 14l3 3 7-7" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><defs><linearGradient id="logoGrad2" x1="2" y1="2" x2="26" y2="26"><stop stop-color="#6366f1"/><stop offset="1" stop-color="#a855f7"/></linearGradient></defs></svg></span>
+            <span class="logo-text">FreeTools</span>
+          </a>
+          <p class="footer-tagline">Powerful image & PDF tools, free forever.</p>
+        </div>
+        <div class="footer-links-group">
+          <div class="footer-col"><h4>Image Tools</h4><ul><li><a href="resize-image.html">Resize Image</a></li><li><a href="image-enhancer.html">Image Enhancer</a></li><li><a href="tool-template.html">Image Compressor</a></li><li><a href="bg-remover.html">Background Remover</a></li></ul></div>
+          <div class="footer-col"><h4>PDF Tools</h4><ul><li><a href="compress-pdf.html">Compress PDF</a></li><li><a href="merge-pdf.html">Merge PDF</a></li><li><a href="pdf-security.html">PDF Security</a></li></ul></div>
+          <div class="footer-col"><h4>Company</h4><ul><li><a href="about.html">About Us</a></li><li><a href="contact.html">Contact Us</a></li><li><a href="privacy-policy.html">Privacy Policy</a></li><li><a href="terms-conditions.html">Terms & Conditions</a></li></ul></div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Free Image & PDF Tools. All rights reserved.</p>
+        <div class="footer-socials">
+          <a href="#" aria-label="Twitter"><i data-lucide="twitter"></i></a>
+          <a href="#" aria-label="GitHub"><i data-lucide="github"></i></a>
+          <a href="#" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <button class="scroll-top" id="scroll-top" aria-label="Scroll to top">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"/></svg>
+  </button>
+
+  <script type="module" src="bg-remover.js"></script>
+</body>
+</html>
