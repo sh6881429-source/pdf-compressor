@@ -2,7 +2,7 @@
 
 **Website Type:** SaaS utility website (PDF tools)  
 **Business/Project Name:** PDF Compressor  
-**Core Features/Services:** Compress PDF, Merge PDF, Sign PDF, PDF Security, Contact/Support
+**Core Features/Services:** Compress PDF, Merge PDF, Sign PDF, PDF Security, Compress Image, Resize Image, Image Enhancer, Background Remover, Contact/Support
 
 ## 1) Main Pages
 
@@ -11,11 +11,17 @@
 - Merge PDF (`/merge-pdf`)
 - Sign PDF (`/sign-pdf`)
 - PDF Security (`/pdf-security`)
+- Compress Image (`/compress-image`)
+- Resize Image (`/resize-image`)
+- Image Enhancer (`/image-enhancer`)
+- Background Remover (`/bg-remover`)
 - Contact (`/contact`)
 - API/Status (optional future)
 - Legal (recommended future)
   - Privacy Policy (`/privacy-policy`)
   - Terms of Service (`/terms`)
+
+---
 
 ## 2) Subpages and Content Structure
 
@@ -54,10 +60,40 @@
 - FAQ block
 - Internal links to Sign and Compress
 
+### Compress Image (`/compress-image`)
+- Upload image(s)
+- Compression quality/size controls
+- Preview before/after
+- Download optimized file(s)
+- Internal links to Resize Image and Image Enhancer
+
+### Resize Image (`/resize-image`)
+- Upload image
+- Resize by dimensions or percentage
+- Maintain aspect ratio toggle
+- Download resized output
+- Internal links to Compress Image and Background Remover
+
+### Image Enhancer (`/image-enhancer`)
+- Upload image
+- Enhancement options (clarity, brightness, contrast)
+- Before/after preview
+- Download enhanced image
+- Internal links to Resize Image and Compress Image
+
+### Background Remover (`/bg-remover`)
+- Upload image
+- Auto background removal
+- Transparent/solid background options
+- Download PNG output
+- Internal links to Image Enhancer and Compress Image
+
 ### Contact (`/contact`)
 - Contact form
 - Support email / help details
 - Response time expectations
+
+---
 
 ## 3) Recommended User Flow
 
@@ -67,6 +103,8 @@
 4. **Cross-Tool Navigation:** User discovers related tools through internal links.
 5. **Support/Trust:** If blocked, user moves to Contact for help.
 
+---
+
 ## 4) SEO-Friendly URL Structure
 
 Use flat, descriptive, keyword-aligned paths:
@@ -75,6 +113,10 @@ Use flat, descriptive, keyword-aligned paths:
 - `/merge-pdf`
 - `/sign-pdf`
 - `/pdf-security`
+- `/compress-image`
+- `/resize-image`
+- `/image-enhancer`
+- `/bg-remover`
 - `/contact`
 
 ### SEO Notes
@@ -84,6 +126,8 @@ Use flat, descriptive, keyword-aligned paths:
 - Add FAQ schema to tool pages where possible.
 - Add canonical tags to avoid duplicate URL variants.
 
+---
+
 ## 5) Tree View
 
 ```text
@@ -92,7 +136,10 @@ Use flat, descriptive, keyword-aligned paths:
 ├── merge-pdf
 ├── sign-pdf
 ├── pdf-security
+├── compress-image
+├── resize-image
+├── image-enhancer
+├── bg-remover
 ├── contact
 ├── privacy-policy (recommended)
 └── terms (recommended)
-```
