@@ -21,6 +21,8 @@
   - Privacy Policy (`/privacy-policy`)
   - Terms of Service (`/terms`)
 
+---
+
 ## 2) Subpages and Content Structure
 
 ### Home (`/`)
@@ -58,7 +60,6 @@
 - FAQ block
 - Internal links to Sign and Compress
 
-
 ### Compress Image (`/compress-image`)
 - Upload image(s)
 - Compression quality/size controls
@@ -92,6 +93,8 @@
 - Support email / help details
 - Response time expectations
 
+---
+
 ## 3) Recommended User Flow
 
 1. **Landing:** User enters from search or direct traffic to Home or a tool page.
@@ -99,6 +102,8 @@
 3. **Task Completion:** Upload → Process → Download.
 4. **Cross-Tool Navigation:** User discovers related tools through internal links.
 5. **Support/Trust:** If blocked, user moves to Contact for help.
+
+---
 
 ## 4) SEO-Friendly URL Structure
 
@@ -121,6 +126,8 @@ Use flat, descriptive, keyword-aligned paths:
 - Add FAQ schema to tool pages where possible.
 - Add canonical tags to avoid duplicate URL variants.
 
+---
+
 ## 5) Tree View
 
 ```text
@@ -136,14 +143,3 @@ Use flat, descriptive, keyword-aligned paths:
 ├── contact
 ├── privacy-policy (recommended)
 └── terms (recommended)
-```
-
-## 6) Sitemap URL (what to type after your domain)
-
-To view the XML sitemap in a browser, type:
-
-- `/sitemap.xml`
-
-Example: `https://yourdomain.com/sitemap.xml`
-
-> Note: Replace `https://example.com` in both `sitemap.xml` and your production config with your real domain before deploying.
