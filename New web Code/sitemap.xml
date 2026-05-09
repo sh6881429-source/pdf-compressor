@@ -1,39 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://example.com/</loc>
+    <loc>https://freeimagepdftools.imageresizer.workers.dev/</loc>
   </url>
   <url>
-    <loc>https://example.com/compress-pdf</loc>
+    <loc>https://freeimagepdftools.imageresizer.workers.dev/compress-pdf</loc>
   </url>
   <url>
-    <loc>https://example.com/merge-pdf</loc>
+    <loc>https://freeimagepdftools.imageresizer.workers.dev/merge-pdf</loc>
   </url>
   <url>
-    <loc>https://example.com/sign-pdf</loc>
+    <loc>https://freeimagepdftools.imageresizer.workers.dev/pdf-security</loc>
   </url>
   <url>
-    <loc>https://example.com/pdf-security</loc>
+    <loc>https://freeimagepdftools.imageresizer.workers.dev/compress-image</loc>
   </url>
   <url>
-    <loc>https://example.com/compress-image</loc>
+    <loc>https://freeimagepdftools.imageresizer.workers.dev/resize-image</loc>
   </url>
   <url>
-    <loc>https://example.com/resize-image</loc>
+    <loc>https://freeimagepdftools.imageresizer.workers.dev/image-enhancer</loc>
   </url>
   <url>
-    <loc>https://example.com/image-enhancer</loc>
+    <loc>https://freeimagepdftools.imageresizer.workers.dev/bg-remover</loc>
   </url>
   <url>
-    <loc>https://example.com/bg-remover</loc>
+    <loc>https://freeimagepdftools.imageresizer.workers.dev/contact</loc>
   </url>
   <url>
-    <loc>https://example.com/contact</loc>
+    <loc>https://freeimagepdftools.imageresizer.workers.dev/privacy-policy</loc>
   </url>
   <url>
-    <loc>https://example.com/privacy-policy</loc>
-  </url>
-  <url>
-    <loc>https://example.com/terms</loc>
+    <loc>https://freeimagepdftools.imageresizer.workers.dev/terms-conditions</loc>
   </url>
 </urlset>
