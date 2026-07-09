@@ -1,0 +1,14 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "pdf-compressor",
+  "compatibility_date": "2026-04-26",
+  "observability": {
+    "enabled": true
+  },
+  "assets": {
+    "directory": "New web Code"
+  },
+  "compatibility_flags": [
+    "nodejs_compat"
+  ]
+}
